@@ -1,10 +1,11 @@
 {
   "keywords": [
     "react",
-    "mui-theme",
-    "muitheme",
-    "dark",
-    "theme mode"
+    "mui",
+    "material",
+    "autocomplete",
+    "breadcrumbs",
+    "floatbuttom"
   ],
   "version": "0.1.1-2",
   "license": "MIT",
