@@ -25,13 +25,13 @@ const BreadcrumbWrapperStyled = styled('div')(({ theme }) => ({
   }
 }))
 
-export interface BreadcrumbsBaseComponentProps extends React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
+export interface IBreadcrumbsBaseComponentProps extends React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
   homeRouteName: string,
   breadcrumbs: BreadcrumbData<string>[],
   unLink?: string[],
 }
 
-export const BreadcrumbsBaseComponent: React.FC<BreadcrumbsBaseComponentProps> = ({ homeRouteName, breadcrumbs, unLink, ...props }) => {
+export const BreadcrumbsBaseComponent: React.FC<IBreadcrumbsBaseComponentProps> = ({ homeRouteName, breadcrumbs, unLink, ...props }) => {
   // const unLink = [
   //   '/bla',
   //   '/blabla'

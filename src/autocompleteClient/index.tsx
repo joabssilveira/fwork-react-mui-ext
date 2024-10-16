@@ -7,15 +7,15 @@ import { ApiClientUtils } from 'fwork-jsts-common/src/apiClient';
 import { useSnackbar } from 'notistack';
 import * as React from 'react';
 
-function sleep(duration: number): Promise<void> {
-  return new Promise<void>((resolve) => {
-    setTimeout(() => {
-      resolve();
-    }, duration);
-  });
-}
+// function sleep(duration: number): Promise<void> {
+//   return new Promise<void>((resolve) => {
+//     setTimeout(() => {
+//       resolve();
+//     }, duration);
+//   });
+// }
 
-export interface AutocompleteClientComponentProps<T extends {}> extends Partial<AutocompleteProps<any, any, any, any, any>> {
+export interface IAutocompleteClientComponentProps<T extends {}> extends Partial<AutocompleteProps<any, any, any, any, any>> {
   inputValueKeyName: string,
   onGetData: (filter: string, keyValue: boolean) => T[] | undefined | Promise<T[] | undefined>
   initKeyValue?: any,
@@ -23,7 +23,7 @@ export interface AutocompleteClientComponentProps<T extends {}> extends Partial<
   textFieldProps?: TextFieldProps
 }
 
-export const AutocompleteClientComponent = <T extends {},>(props: AutocompleteClientComponentProps<T>) => {
+export const AutocompleteClientComponent = <T extends {},>(props: IAutocompleteClientComponentProps<T>) => {
   console.log('DropDownSearchComponent')
 
   const { initKeyValue, onChangeItem, inputValueKeyName: labelName, onGetData, textFieldProps, ...rest } = props
@@ -38,7 +38,7 @@ export const AutocompleteClientComponent = <T extends {},>(props: AutocompleteCl
     if (loading) return
     setLoading(true)
 
-    await sleep(1e3);
+    // await sleep(1e3);
 
     try {
       return await onGetData(filter, keyValue)
@@ -47,6 +47,8 @@ export const AutocompleteClientComponent = <T extends {},>(props: AutocompleteCl
     } finally {
       setLoading(false)
     }
+
+    return undefined
   }
 
   const handleOpen = () => {
@@ -80,7 +82,7 @@ export const AutocompleteClientComponent = <T extends {},>(props: AutocompleteCl
         options={rest.options ?? options}
         loading={rest.loading ?? loading}
         inputValue={rest.inputValue ?? inputValue}
-        onChange={rest.onChange ?? ((event: any, newValue: T | null) => {
+        onChange={rest.onChange ?? ((_: any, newValue: T | null) => {
           console.log('onchange')
           console.log(newValue)
           setInputValue(newValue ? (newValue as any)[labelName] : '')
