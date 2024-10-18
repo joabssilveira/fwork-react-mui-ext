@@ -87,7 +87,7 @@ export const TableBaseComponent: React.FC<TableBaseComponentProps<any>> = <T,>(p
   return <>
     <div {...props.wrapperProps}
       className={`table-and-pagination-wrapper ${props.wrapperProps?.className}`}
-      style={{ overflow: 'hidden', ...props.wrapperProps?.style, }}>
+    >
       <div className={`table-shadow-wrapper ${props.tableShadowContainerProps?.className}`}
         style={{
           boxShadow: 'rgb(0 0 0 / 16%) 1px 1px 3px',
