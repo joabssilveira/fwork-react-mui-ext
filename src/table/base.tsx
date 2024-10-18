@@ -54,7 +54,7 @@ export const TableBaseComponent: React.FC<TableBaseComponentProps<any>> = <T,>(p
       props.onRowsPerPageChange(rowsPerPage)
   }, [rowsPerPage])
 
-  const handleChangePage = (event: unknown, newPage: number) => setPage(newPage)
+  const handleChangePage = (_: unknown, newPage: number) => setPage(newPage)
 
   const handleChangeRowsPerPage = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setRowsPerPage(+event.target.value)
