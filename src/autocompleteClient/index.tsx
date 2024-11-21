@@ -26,7 +26,7 @@ export interface IAutocompleteClientComponentProps<T extends {}> extends Partial
 export const AutocompleteClientComponent = <T extends {},>(props: IAutocompleteClientComponentProps<T>) => {
   console.log('DropDownSearchComponent')
 
-  const { initKeyValue, onChangeItem, inputValueKeyName: labelName, onGetData, textFieldProps, ...rest } = props
+  const { initKeyValue, onChangeItem, inputValueKeyName, onGetData, textFieldProps, ...rest } = props
 
   const [inputValue, setInputValue] = React.useState('');
   const [open, setOpen] = React.useState(false);
@@ -55,6 +55,11 @@ export const AutocompleteClientComponent = <T extends {},>(props: IAutocompleteC
     setOpen(true);
   };
 
+
+  function getNestedProperty<T>(obj: T, path: string): any {
+    return path.split('.').reduce((acc, key) => acc && (acc as any)[key], obj);
+  }
+
   React.useEffect(() => {
     if (initKeyValue)
       (async () => {
@@ -62,7 +67,8 @@ export const AutocompleteClientComponent = <T extends {},>(props: IAutocompleteC
 
         setOptions(dataResponse ?? [])
         if (dataResponse?.length)
-          setInputValue((dataResponse[0] as any)[labelName])
+          // setInputValue((dataResponse[0] as any)[labelName])
+          setInputValue(getNestedProperty(dataResponse[0], inputValueKeyName))
       })();
   }, [initKeyValue])
 
@@ -77,15 +83,23 @@ export const AutocompleteClientComponent = <T extends {},>(props: IAutocompleteC
         open={rest.open ?? open}
         onOpen={rest.onOpen ?? handleOpen}
         onClose={rest.onClose ?? handleClose}
-        isOptionEqualToValue={rest.isOptionEqualToValue ?? ((option, value) => option.name === value.name)}
-        getOptionLabel={rest.getOptionLabel ?? ((option) => option.name)}
+        // isOptionEqualToValue={rest.isOptionEqualToValue ?? ((option, value) => option.name === value.name)}
+        // getOptionLabel={rest.getOptionLabel ?? ((option) => option.name)}
+        isOptionEqualToValue={rest.isOptionEqualToValue ?? ((option, value) => {
+          // return option[inputValueKeyName] === value[inputValueKeyName]
+          return  getNestedProperty(option, inputValueKeyName) === getNestedProperty(value, inputValueKeyName)
+        })}
+        getOptionLabel={rest.getOptionLabel ?? ((option) => {
+          // return option[inputValueKeyName]
+          return getNestedProperty(option, inputValueKeyName) 
+        })}
         options={rest.options ?? options}
         loading={rest.loading ?? loading}
         inputValue={rest.inputValue ?? inputValue}
         onChange={rest.onChange ?? ((_: any, newValue: T | null) => {
           console.log('onchange')
           console.log(newValue)
-          setInputValue(newValue ? (newValue as any)[labelName] : '')
+          setInputValue(newValue ? (newValue as any)[inputValueKeyName] : '')
           if (onChangeItem)
             onChangeItem(newValue)
         })}
