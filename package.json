@@ -8,7 +8,7 @@
     "floatbuttom",
     "table"
   ],
-  "version": "0.1.1-9",
+  "version": "2.0.0",
   "license": "MIT",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
@@ -22,7 +22,7 @@
   },
   "scripts": {
     "start": "tsdx watch",
-    "build": "tsdx build",
+    "build": "set NODE_OPTIONS=--max-old-space-size=8192 && tsdx build",
     "test": "tsdx test --passWithNoTests",
     "lint": "tsdx lint",
     "prepare": "tsdx build",
@@ -31,9 +31,6 @@
     "release:major": "standard-version -M && git add CHANGELOG.md && git commit -m \"updated CHANGELOG.md\" && npm version major && git push origin && git push origin --tags && npm publish --access public",
     "release:minor": "standard-version -m && git add CHANGELOG.md && git commit -m \"updated CHANGELOG.md\" && npm version minor && git push origin && git push origin --tags && npm publish --access public",
     "release:patch": "standard-version -p && git add CHANGELOG.md && git commit -m \"updated CHANGELOG.md\" && npm version patch && git push origin && git push origin --tags && npm publish --access public"
-  },
-  "peerDependencies": {
-    "react": ">=16"
   },
   "husky": {
     "hooks": {
@@ -61,26 +58,26 @@
   ],
   "devDependencies": {
     "@size-limit/preset-small-lib": "^9.0.0",
-    "@types/react": "^18.2.21",
-    "@types/react-dom": "^18.2.7",
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1",
     "husky": "^8.0.3",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
     "size-limit": "^9.0.0",
     "standard-version": "^9.5.0",
     "tsdx": "^0.14.1",
     "tslib": "^2.6.2",
-    "typescript": "^3.9.10"
+    "typescript": "^5.6.3"
   },
   "dependencies": {
-    "@emotion/react": "^11.11.1",
-    "@emotion/styled": "^11.11.0",
-    "@mui/icons-material": "^5.14.9",
-    "@mui/material": "^5.14.9",
+    "@emotion/react": "^11.13.3",
+    "@emotion/styled": "^11.13.0",
+    "@mui/icons-material": "^6.1.7",
+    "@mui/material": "^6.1.7",
     "fwork-jsts-common": "^0.1.2-13",
-    "notistack": "^2.0.8",
+    "notistack": "^3.0.1",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-icons": "^4.6.0",
     "react-router-dom": "^6.4.3",
-    "use-react-router-breadcrumbs": "^4.0.1",
-    "react-icons": "^4.6.0"
+    "use-react-router-breadcrumbs": "^4.0.1"
   }
 }
