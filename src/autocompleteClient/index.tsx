@@ -1,5 +1,3 @@
-// 16-10-2024
-
 import Autocomplete, { AutocompleteProps } from '@mui/material/Autocomplete';
 import CircularProgress from '@mui/material/CircularProgress';
 import TextField, { TextFieldProps } from '@mui/material/TextField';
@@ -24,8 +22,6 @@ export interface IAutocompleteClientComponentProps<T extends {}> extends Partial
 }
 
 export const AutocompleteClientComponent = <T extends {},>(props: IAutocompleteClientComponentProps<T>) => {
-  console.log('DropDownSearchComponent')
-
   const { initKeyValue, onChangeItem, inputValueKeyName, onGetData, textFieldProps, ...rest } = props
 
   const [inputValue, setInputValue] = React.useState('');
@@ -67,7 +63,6 @@ export const AutocompleteClientComponent = <T extends {},>(props: IAutocompleteC
 
         setOptions(dataResponse ?? [])
         if (dataResponse?.length)
-          // setInputValue((dataResponse[0] as any)[labelName])
           setInputValue(getNestedProperty(dataResponse[0], inputValueKeyName))
       })();
   }, [initKeyValue])
@@ -83,23 +78,18 @@ export const AutocompleteClientComponent = <T extends {},>(props: IAutocompleteC
         open={rest.open ?? open}
         onOpen={rest.onOpen ?? handleOpen}
         onClose={rest.onClose ?? handleClose}
-        // isOptionEqualToValue={rest.isOptionEqualToValue ?? ((option, value) => option.name === value.name)}
-        // getOptionLabel={rest.getOptionLabel ?? ((option) => option.name)}
         isOptionEqualToValue={rest.isOptionEqualToValue ?? ((option, value) => {
-          // return option[inputValueKeyName] === value[inputValueKeyName]
           return  getNestedProperty(option, inputValueKeyName) === getNestedProperty(value, inputValueKeyName)
         })}
         getOptionLabel={rest.getOptionLabel ?? ((option) => {
-          // return option[inputValueKeyName]
-          return getNestedProperty(option, inputValueKeyName) 
+          const result = getNestedProperty(option, inputValueKeyName)
+          return result
         })}
         options={rest.options ?? options}
         loading={rest.loading ?? loading}
-        inputValue={rest.inputValue ?? inputValue}
+        inputValue={rest.inputValue ?? inputValue ?? ''}
         onChange={rest.onChange ?? ((_: any, newValue: T | null) => {
-          console.log('onchange')
-          console.log(newValue)
-          setInputValue(newValue ? (newValue as any)[inputValueKeyName] : '')
+          setInputValue(newValue ? getNestedProperty(newValue, inputValueKeyName) : '')
           if (onChangeItem)
             onChangeItem(newValue)
         })}
