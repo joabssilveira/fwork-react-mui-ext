@@ -58,5 +58,5 @@
 		"release:patch": "standard-version -p && git add CHANGELOG.md && git commit -m \"updated CHANGELOG.md\" && npm version patch && git push origin && git push origin --tags && npm publish --access public"
 	},
 	"types": "dist/index.d.ts",
-	"version": "2.0.1"
+	"version": "2.0.2"
 }
