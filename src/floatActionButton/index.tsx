@@ -40,7 +40,7 @@ export const FloatActionButtonComponent: React.FC<IFloatActionButtonComponentPro
   return <SpeedDial
     {...rest}
     ariaLabel={rest.ariaLabel ?? "FloatActionButton"}
-    sx={{ position: 'absolute', bottom: 16, right: 16, ...rest.sx }}
+    sx={{ position: 'fixed', bottom: 16, right: 16, ...rest.sx }}
     icon={
       rest?.icon && progress || progress ? <CircularProgress size={30} style={{ color: 'white' }} /> : rest?.icon ? rest?.icon : <MenuIcon />
     }

@@ -1,10 +1,10 @@
 import { LabelDisplayedRowsArgs, Table, TableBody, TableBodyProps, TablePagination, TablePaginationProps, TableProps } from '@mui/material'
 import * as locales from '@mui/material/locale'
 import { ThemeProvider, createTheme, useTheme } from '@mui/material/styles'
-import { CommonUtils } from 'fwork-jsts-common/src'
 import React, { ReactNode, useEffect, useMemo, useState } from 'react'
-import { TablePaginationActions } from './actions'
 import { SupportedLocales, TableComponentSetCurrPageProps } from './common'
+import { CommonUtils } from 'fwork-jsts-common'
+import { TablePaginationActions } from './actions'
 
 export interface TableBaseComponentProps<T> {
   downloadCsv?: boolean,
@@ -128,14 +128,20 @@ export const TableBaseComponent: React.FC<TableBaseComponentProps<any>> = <T,>(p
             labelDisplayedRows={(paginationInfo: LabelDisplayedRowsArgs) => {
               return props.paginationProps?.labelDisplayedRows ? props.paginationProps.labelDisplayedRows(paginationInfo) : handleLabelDisplayedRows(paginationInfo)
             }}
-            ActionsComponent={(subprops) => <>
-              {props.paginationProps?.ActionsComponent}
-              <TablePaginationActions
-                {...subprops}
-                downloadCsv={props.downloadCsv}
-                onExport={() => CommonUtils.exportToCSV(props.bodyList)}
-              />
-            </>}
+            
+            ActionsComponent={(subprops) => {
+              const CustomActions = props.paginationProps?.ActionsComponent;
+              return (
+                <>
+                  {CustomActions && <CustomActions {...subprops} />}
+                  <TablePaginationActions
+                    {...subprops}
+                    downloadCsv={props.downloadCsv}
+                    onExport={() => CommonUtils.exportToCSV(props.bodyList)}
+                  />
+                </>
+              );
+            }}
 
             onPageChange={(e, newPage) => {
               handleChangePage(e, newPage)

@@ -79,7 +79,7 @@ export const AutocompleteClientComponent = <T extends {},>(props: IAutocompleteC
         onOpen={rest.onOpen ?? handleOpen}
         onClose={rest.onClose ?? handleClose}
         isOptionEqualToValue={rest.isOptionEqualToValue ?? ((option, value) => {
-          return  getNestedProperty(option, inputValueKeyName) === getNestedProperty(value, inputValueKeyName)
+          return getNestedProperty(option, inputValueKeyName) === getNestedProperty(value, inputValueKeyName)
         })}
         getOptionLabel={rest.getOptionLabel ?? ((option) => {
           const result = getNestedProperty(option, inputValueKeyName)
@@ -94,17 +94,33 @@ export const AutocompleteClientComponent = <T extends {},>(props: IAutocompleteC
             onChangeItem(newValue)
         })}
         renderInput={rest.renderInput ?? ((params) => (
+          // <TextField
+          //   {...params}
+          //   {...textFieldProps}
+          //   InputProps={{
+          //     ...params.InputProps,
+          //     endAdornment: (
+          //       <>
+          //         {loading ? <CircularProgress color="inherit" size={20} /> : null}
+          //         {params.InputProps?.endAdornment}
+          //       </>
+          //     ),
+          //   }}
+          //   onChange={(e) => setInputValue(e.target.value)}
+          // />
           <TextField
             {...params}
             {...textFieldProps}
-            InputProps={{
-              ...params.InputProps,
-              endAdornment: (
-                <>
-                  {loading ? <CircularProgress color="inherit" size={20} /> : null}
-                  {params.InputProps?.endAdornment}
-                </>
-              ),
+            slotProps={{
+              input: {
+                ...params.InputProps, // Preserva as configurações existentes
+                endAdornment: (
+                  <>
+                    {loading ? <CircularProgress color="inherit" size={20} /> : null}
+                    {params.InputProps?.endAdornment}
+                  </>
+                ),
+              },
             }}
             onChange={(e) => setInputValue(e.target.value)}
           />
