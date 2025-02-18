@@ -1,8 +1,9 @@
-import { ListItemText, TableRowProps } from '@mui/material'
+import { alpha, ListItemText, TableRowProps } from '@mui/material'
 import TableCell from '@mui/material/TableCell'
 import TableRow from '@mui/material/TableRow'
 import * as locales from '@mui/material/locale'
 import styled from '@mui/material/styles/styled'
+import { ColorUtils } from 'fwork-jsts-common'
 
 export type SupportedLocales = keyof typeof locales
 
@@ -28,6 +29,9 @@ export const StyledTableRow = styled(TableRow, {
   '&:last-child td, &:last-child th': {
     border: 0,
   },
+  '&&:hover': {
+    backgroundColor: ColorUtils.incColor(theme.palette.background.default, -20),
+  }
 }))
 
 // EXPORTED METHOD...

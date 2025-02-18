@@ -1,7 +1,7 @@
 import Autocomplete, { AutocompleteProps } from '@mui/material/Autocomplete';
 import CircularProgress from '@mui/material/CircularProgress';
 import TextField, { TextFieldProps } from '@mui/material/TextField';
-import { ApiClientUtils } from 'fwork-jsts-common/src/apiClient';
+import { ApiClientUtils } from 'fwork-jsts-common';
 import { useSnackbar } from 'notistack';
 import * as React from 'react';
 
