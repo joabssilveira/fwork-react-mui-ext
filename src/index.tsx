@@ -7,7 +7,7 @@ import { TablePaginationActions, TablePaginationActionsPropsExt } from './table/
 import { TableBaseComponent, TableBaseComponentProps } from './table/base'
 import { TableComponentSetCurrPageProps, StyledTableRow, StyledTableRowProps, StyledTableCell, StyledListItemText, SupportedLocales } from './table/common'
 import { StyledTableTitleCell, TableObjWrapperComponent, ObjInTableComponentProps, ObjInTableShowHideWrapperComponent } from './table/objWrapper'
-import './styles/index.css'
+require('./styles/index.css')
 
 export {
   AutocompleteClientComponent, IAutocompleteClientComponentProps,
