@@ -1,0 +1,75 @@
+@font-face {
+  font-family: "BarlowCondensed";
+  src: local("BarlowCondensedRegular"),
+    url("../fonts/BarlowCondensed/BarlowCondensed-Regular.ttf") format("truetype");
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: "BarlowCondensed";
+  src: local("BarlowCondensedBold"),
+    url("../fonts/BarlowCondensed/BarlowCondensed-Bold.ttf") format("truetype");
+  font-weight: bold;
+}
+
+@font-face {
+  font-family: "OpenSans";
+  src: local("OpenSansRegular"),
+    url("../fonts/OpenSans/static/OpenSans/OpenSans-Regular.ttf") format("truetype");
+  font-weight: normal;
+}
+
+* {
+  font-family: 'OpenSans';
+}
+
+/*GENERAL*/
+input:focus,
+textarea:focus,
+select:focus {
+  outline: none;
+}
+
+/*SCROLL BARS*/
+::-webkit-scrollbar {
+  width: 3px;
+  height: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(35deg, #808080 38%, #808080 60%);
+  border-radius: 50px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(13deg, #727272 14%, #727272 64%);
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+  border-radius: 0px;
+}
+
+/*SCROLL BARS FIREFOX*/
+* {
+  scrollbar-face-color: rgb(128, 128, 128);
+  /* Firefox 63 compatibility */
+  scrollbar-track-color: rgb(255, 255, 255);
+  /* Firefox 63 compatibility */
+  scrollbar-color: rgb(128, 128, 128) rgb(255, 255, 255);
+  scrollbar-width: thin;
+}
+
+/*SNACKBAR*/
+/* .SnackbarContainer-root {
+  left: 0 !important;
+  bottom: 0 !important;
+  right: 0 !important;
+}
+.SnackbarContainer-root, .SnackbarContainer-root > *, .SnackbarContent-root {
+  min-width: 100% !important;
+  border-radius: 0 !important;
+}
+.SnackbarContainer-root, .SnackbarContainer-root > * > * {
+  padding: 0 !important;
+} */
