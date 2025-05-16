@@ -5,11 +5,11 @@ import CheckIcon from '@mui/icons-material/Check'
 import CloseIcon from '@mui/icons-material/Close'
 import DeleteIcon from '@mui/icons-material/Delete'
 import EditIcon from '@mui/icons-material/Edit'
-import MenuIcon from '@mui/icons-material/Menu'
 import ExecuteIcon from '@mui/icons-material/PlayArrow'
 import { CircularProgress } from '@mui/material'
 import SpeedDial, { SpeedDialProps } from '@mui/material/SpeedDial'
 import SpeedDialAction from '@mui/material/SpeedDialAction'
+import SpeedDialIcon from '@mui/material/SpeedDialIcon'
 import * as React from 'react'
 
 export interface IFloatActionButtonComponentProps extends SpeedDialProps {
@@ -42,7 +42,7 @@ export const FloatActionButtonComponent: React.FC<IFloatActionButtonComponentPro
     ariaLabel={rest.ariaLabel ?? "FloatActionButton"}
     sx={{ position: 'fixed', bottom: 16, right: 16, ...rest.sx }}
     icon={
-      rest?.icon && progress || progress ? <CircularProgress size={30} style={{ color: 'white' }} /> : rest?.icon ? rest?.icon : <MenuIcon />
+      rest?.icon && progress || progress ? <CircularProgress size={30} style={{ color: 'white' }} /> : rest?.icon ? rest?.icon : <SpeedDialIcon />
     }
     onClose={handleClose}
     onOpen={handleOpen}
