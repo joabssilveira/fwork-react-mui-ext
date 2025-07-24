@@ -58,7 +58,10 @@ export const AutocompleteClientComponent = <T extends {},>(props: IAutocompleteC
 
   React.useEffect(() => {
     if (getOnInit)
-      getData('', false)
+      (async () => {
+        let dataResponse = await getData('', false)
+        setOptions(dataResponse ?? [])
+      })();
   }, [])
 
   React.useEffect(() => {
