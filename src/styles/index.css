@@ -73,3 +73,25 @@ select:focus {
 .SnackbarContainer-root, .SnackbarContainer-root > * > * {
   padding: 0 !important;
 } */
+
+/* TABLE PAGINATION */
+.MuiTablePagination-root .MuiToolbar-root {
+  overflow: hidden;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.MuiTablePagination-root .MuiToolbar-root * {
+  margin: 0;
+}
+
+.MuiTablePagination-root .MuiTablePagination-spacer {
+  display: none;
+}
+
+.MuiTablePagination-root .MuiBox-root {
+  flex-grow: 1;
+  display: flex;
+  justify-content: end;
+}

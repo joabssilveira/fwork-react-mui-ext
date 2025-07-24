@@ -18,11 +18,12 @@ export interface IAutocompleteClientComponentProps<T extends {}> extends Partial
   onGetData: (filter: string, keyValue: boolean) => T[] | undefined | Promise<T[] | undefined>
   initKeyValue?: any,
   onChangeItem?: (data?: T | null) => void,
-  textFieldProps?: TextFieldProps
+  textFieldProps?: TextFieldProps,
+  getOnInit?: boolean,
 }
 
 export const AutocompleteClientComponent = <T extends {},>(props: IAutocompleteClientComponentProps<T>) => {
-  const { initKeyValue, onChangeItem, inputValueKeyName, onGetData, textFieldProps, ...rest } = props
+  const { initKeyValue, onChangeItem, inputValueKeyName, onGetData, textFieldProps, getOnInit, ...rest } = props
 
   const [inputValue, setInputValue] = React.useState('');
   const [open, setOpen] = React.useState(false);
@@ -51,10 +52,14 @@ export const AutocompleteClientComponent = <T extends {},>(props: IAutocompleteC
     setOpen(true);
   };
 
-
   function getNestedProperty<T>(obj: T, path: string): any {
     return path.split('.').reduce((acc, key) => acc && (acc as any)[key], obj);
   }
+
+  React.useEffect(() => {
+    if (getOnInit)
+      getData('', false)
+  }, [])
 
   React.useEffect(() => {
     if (initKeyValue)
