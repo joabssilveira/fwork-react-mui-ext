@@ -5,7 +5,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { BreadcrumbData } from 'use-react-router-breadcrumbs';
 
 // ICONS
-import { styled } from '@mui/material';
+import { styled, useTheme } from '@mui/material';
 import { IoMdHome as HomeIcon } from 'react-icons/io';
 import { MdOutlineArrowForwardIos as DividerIcon } from 'react-icons/md';
 
@@ -32,6 +32,7 @@ export interface IBreadcrumbsBaseComponentProps extends React.DetailedHTMLProps<
 }
 
 export const BreadcrumbsBaseComponent: React.FC<IBreadcrumbsBaseComponentProps> = ({ homeRouteName, breadcrumbs, unLink, ...props }) => {
+  const theme = useTheme()
   // const unLink = [
   //   '/bla',
   //   '/blabla'
@@ -61,13 +62,13 @@ export const BreadcrumbsBaseComponent: React.FC<IBreadcrumbsBaseComponentProps> 
           {/* HOME */}
           {args.match.pathname == homeRouteName ?
             <Link style={breadcrumbAlignItem} to={args.match.pathname}>
-              <HomeIcon style={{ ...breadcrumbAlignItem, color: '#166CC8', marginRight: 5 }} />
+              <HomeIcon style={{ ...breadcrumbAlignItem, color: theme.palette.mode == 'dark' ? '#CFD2D6' : '#166CC8', marginRight: 5 }} />
             </Link> : null}
 
           <span style={{ ...breadcrumbAlignItem }}>
             {/* ARROW DIVIDER */}
             {args.match.pathname != homeRouteName ?
-              <DividerIcon style={{ ...breadcrumbAlignItem, margin: '0px 5px 0px 5px', color: '#505050' }} /> : null}
+              <DividerIcon style={{ ...breadcrumbAlignItem, margin: '0px 5px 0px 5px', color: theme.palette.mode == 'dark' ? '#CFD2D6' : '#505050' }} /> : null}
 
             {/* PATH/ROUTES NAMES */}
             {[':id', 'new'].includes(args.match.params.id ?? '') ? 'Novo' : location.pathname == args.match.pathname ?
