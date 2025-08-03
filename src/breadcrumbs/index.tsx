@@ -13,7 +13,8 @@ import { MdOutlineArrowForwardIos as DividerIcon } from 'react-icons/md';
 const breadcrumbAlignItem: React.CSSProperties = { display: 'flex', alignSelf: 'center' }
 const breadcrumbLinkDecorationLight: React.CSSProperties = { textDecoration: 'none', color: '#166CC8' }
 const breadcrumbLinkDecorationDark: React.CSSProperties = { textDecoration: 'none', color: '#CFD2D6' }
-const colorUnlink: React.CSSProperties = { color: '#606060' }
+const colorUnlinkLight: React.CSSProperties = { color: '#606060' }
+const colorUnlinkDark: React.CSSProperties = { color: '#C5C8CB' }
 
 const BreadcrumbWrapperStyled = styled('div')(({ theme }) => ({
   display: 'flex',
@@ -73,9 +74,9 @@ export const BreadcrumbsBaseComponent: React.FC<IBreadcrumbsBaseComponentProps> 
 
             {/* PATH/ROUTES NAMES */}
             {[':id', 'new'].includes(args.match.params.id ?? '') ? 'Novo' : location.pathname == args.match.pathname ?
-              <div style={colorUnlink}> {args.breadcrumb}</div> :
+              <div style={theme.palette.mode == 'dark' ? colorUnlinkDark : colorUnlinkLight}> {args.breadcrumb}</div> :
               checkArrays([args.match.pathname], unLink ?? []) ?
-                <div style={colorUnlink}>{args.match.route?.breadcrumb as string}</div> :
+                <div style={theme.palette.mode == 'dark' ? colorUnlinkDark : colorUnlinkLight}>{args.match.route?.breadcrumb as string}</div> :
                 <Link style={theme.palette.mode == 'dark' ? breadcrumbLinkDecorationDark : breadcrumbLinkDecorationLight} to={args.match.pathname}>{args.breadcrumb}</Link>}
           </span>
         </React.Fragment>
