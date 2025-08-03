@@ -11,7 +11,8 @@ import { MdOutlineArrowForwardIos as DividerIcon } from 'react-icons/md';
 
 // STYLE
 const breadcrumbAlignItem: React.CSSProperties = { display: 'flex', alignSelf: 'center' }
-const breadcrumbLinkDecoration: React.CSSProperties = { textDecoration: 'none', color: '#166CC8' }
+const breadcrumbLinkDecorationLight: React.CSSProperties = { textDecoration: 'none', color: '#166CC8' }
+const breadcrumbLinkDecorationDark: React.CSSProperties = { textDecoration: 'none', color: '#CFD2D6' }
 const colorUnlink: React.CSSProperties = { color: '#606060' }
 
 const BreadcrumbWrapperStyled = styled('div')(({ theme }) => ({
@@ -75,7 +76,7 @@ export const BreadcrumbsBaseComponent: React.FC<IBreadcrumbsBaseComponentProps> 
               <div style={colorUnlink}> {args.breadcrumb}</div> :
               checkArrays([args.match.pathname], unLink ?? []) ?
                 <div style={colorUnlink}>{args.match.route?.breadcrumb as string}</div> :
-                <Link style={breadcrumbLinkDecoration} to={args.match.pathname}>{args.breadcrumb}</Link>}
+                <Link style={theme.palette.mode == 'dark' ? breadcrumbLinkDecorationDark : breadcrumbLinkDecorationLight} to={args.match.pathname}>{args.breadcrumb}</Link>}
           </span>
         </React.Fragment>
       })}
