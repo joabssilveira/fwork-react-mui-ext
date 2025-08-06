@@ -25,6 +25,7 @@ export const AutocompleteClientComponentExample = () => {
     {post != null && <label>{`selected post: ${post?.title}`}</label>}
     <AutocompleteClientComponent
       getOnInit
+      fitDropDownWidth
       getOptionLabel={(post: IPost) => {
         return `${post.title} (${post.id})`
       }}

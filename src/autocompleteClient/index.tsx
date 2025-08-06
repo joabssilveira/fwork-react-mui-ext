@@ -1,3 +1,4 @@
+import { Popper, PopperProps, autocompleteClasses, } from '@mui/material';
 import Autocomplete, { AutocompleteProps } from '@mui/material/Autocomplete';
 import CircularProgress from '@mui/material/CircularProgress';
 import TextField, { TextFieldProps } from '@mui/material/TextField';
@@ -20,10 +21,15 @@ export interface IAutocompleteClientComponentProps<T extends {}> extends Partial
   onChangeItem?: (data?: T | null) => void,
   textFieldProps?: TextFieldProps,
   getOnInit?: boolean,
+  fitDropDownWidth?: boolean,
 }
 
+const CustomPopper = (props: PopperProps) => {
+  return <Popper {...props} style={{ width: "auto" }} placement="bottom-start" />;
+};
+
 export const AutocompleteClientComponent = <T extends {},>(props: IAutocompleteClientComponentProps<T>) => {
-  const { initKeyValue, onChangeItem, inputValueKeyName, onGetData, textFieldProps, getOnInit, ...rest } = props
+  const { initKeyValue, onChangeItem, inputValueKeyName, onGetData, textFieldProps, getOnInit, fitDropDownWidth, ...rest } = props
 
   const [inputValue, setInputValue] = React.useState('');
   const [open, setOpen] = React.useState(false);
@@ -83,6 +89,16 @@ export const AutocompleteClientComponent = <T extends {},>(props: IAutocompleteC
     <>
       <Autocomplete
         {...rest}
+        // PopperComponent={CustomPopper}
+        slots={{
+          popper: fitDropDownWidth ? CustomPopper : undefined
+        }}
+        sx={{
+          [`& .${autocompleteClasses.paper}`]: {
+            minWidth: fitDropDownWidth ? "fit-content" : undefined,
+          },
+        }}
+
         open={rest.open ?? open}
         onOpen={rest.onOpen ?? handleOpen}
         onClose={rest.onClose ?? handleClose}
