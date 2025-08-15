@@ -422,7 +422,7 @@ export const DateTimeRangeComponent: React.FC<IDateTimeRangeDialogComponentProps
           </Grid>
         </Grid>
       </div>}
-      onConfirm={(e) => onConfirm?.(di, df, label, periodValueKey)}
+      onConfirm={(_) => onConfirm?.(di, df, label, periodValueKey)}
       style={style}
     >
       <Button style={{ width: '100%', height: '100%' }} variant="outlined">{di && df ? `Período entre ${new Date(di.unix() * 1000).toLocaleDateString()} e ${new Date(df.unix() * 1000).toLocaleDateString()} ${label ? ' - ' + label : ''}` : 'Clique para escolher o período'}</Button>
