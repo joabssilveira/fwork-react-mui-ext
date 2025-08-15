@@ -4,6 +4,7 @@ import { DatePickerExtComponent, DatePickerExtComponentProps, DateTimePickerExtC
 import { DateTimeRangeComponent, IDateTimeRangeDialogComponentProps, PeriodValuesKeys, periodsValues } from './dateTimeRange'
 import { FloatActionButtonComponent, IFloatActionButtonComponentProps } from './floatActionButton'
 import { IModalComponentProps, ModalComponent } from './modal'
+import { ModalBoxStyledComponent } from './modal/modalBox'
 import useSnackbarExt from './snackbarExt'
 import { TableComponent, TableComponentProps, TableComponentRowProps } from './table'
 import { TablePaginationActions, TablePaginationActionsPropsExt } from './table/actions'
@@ -19,6 +20,7 @@ export {
   DateTimeRangeComponent, IDateTimeRangeDialogComponentProps, PeriodValuesKeys, periodsValues,
   FloatActionButtonComponent, IFloatActionButtonComponentProps,
   IModalComponentProps, ModalComponent,
+  ModalBoxStyledComponent,
   useSnackbarExt,
   TableComponent, TableComponentProps, TableComponentRowProps,
   TablePaginationActions, TablePaginationActionsPropsExt,
