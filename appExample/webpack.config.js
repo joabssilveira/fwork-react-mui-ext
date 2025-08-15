@@ -12,13 +12,13 @@ module.exports = {
   output: {
     path: path.resolve(rootDir, 'appExample/dist'),
     filename: 'bundle.js',
-    clean: true,
+    clean: true
   },
   resolve: {
     extensions: ['.tsx', '.ts', '.js'],
     alias: {
-      '@lib': path.resolve(rootDir, 'src'),
-    },
+      '@lib': path.resolve(rootDir, 'src')
+    }
   },
   module: {
     rules: [
@@ -26,20 +26,20 @@ module.exports = {
         test: /\.(ts|tsx)$/,
         loader: 'ts-loader',
         options: {
-          configFile: path.resolve(rootDir, 'appExample/tsconfig.json'),
+          configFile: path.resolve(rootDir, 'appExample/tsconfig.json')
         },
-        exclude: /node_modules/,
-      },
-    ],
+        exclude: /node_modules/
+      }
+    ]
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: path.resolve(rootDir, 'appExample/index.html'),
-    }),
+      template: path.resolve(rootDir, 'appExample/index.html')
+    })
   ],
   devServer: {
     static: path.resolve(rootDir, 'appExample/dist'),
     port: 3000,
-    open: true,
-  },
+    open: true
+  }
 }

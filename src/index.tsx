@@ -1,6 +1,9 @@
 import { AutocompleteClientComponent, IAutocompleteClientComponentProps } from './autocompleteClient'
 import { BreadcrumbsBaseComponent, IBreadcrumbsBaseComponentProps } from './breadcrumbs'
+import { DatePickerExtComponent, DatePickerExtComponentProps, DateTimePickerExtComponent, DateTimePickerExtComponentProps } from './datePicker'
+import { DateTimeRangeComponent, IDateTimeRangeDialogComponentProps, PeriodValuesKeys, periodsValues } from './dateTimeRange'
 import { FloatActionButtonComponent, IFloatActionButtonComponentProps } from './floatActionButton'
+import { IModalComponentProps, ModalComponent } from './modal'
 import useSnackbarExt from './snackbarExt'
 import { TableComponent, TableComponentProps, TableComponentRowProps } from './table'
 import { TablePaginationActions, TablePaginationActionsPropsExt } from './table/actions'
@@ -12,11 +15,14 @@ import './styles/index.css'
 export {
   AutocompleteClientComponent, IAutocompleteClientComponentProps,
   BreadcrumbsBaseComponent, IBreadcrumbsBaseComponentProps,
+  DatePickerExtComponent, DatePickerExtComponentProps, DateTimePickerExtComponent, DateTimePickerExtComponentProps,
+  DateTimeRangeComponent, IDateTimeRangeDialogComponentProps, PeriodValuesKeys, periodsValues,
   FloatActionButtonComponent, IFloatActionButtonComponentProps,
+  IModalComponentProps, ModalComponent,
+  useSnackbarExt,
   TableComponent, TableComponentProps, TableComponentRowProps,
   TablePaginationActions, TablePaginationActionsPropsExt,
   TableBaseComponent, TableBaseComponentProps,
   TableComponentSetCurrPageProps, StyledTableRow, StyledTableRowProps, StyledTableCell, StyledListItemText, SupportedLocales,
   StyledTableTitleCell, TableObjWrapperComponent, ObjInTableComponentProps, ObjInTableShowHideWrapperComponent,
-  useSnackbarExt
 }
