@@ -1,7 +1,7 @@
 import { AutocompleteClientComponent, IAutocompleteClientComponentProps } from './autocompleteClient'
 import { BreadcrumbsBaseComponent, IBreadcrumbsBaseComponentProps } from './breadcrumbs'
 import { DatePickerExtComponent, DatePickerExtComponentProps, DateTimePickerExtComponent, DateTimePickerExtComponentProps } from './datePicker'
-import { DateTimeRangeComponent, IDateTimeRangeDialogComponentProps, PeriodValuesKeys, periodsValues } from './dateTimeRange'
+import { DateTimeRangeComponent, IDateTimeRangeDialogComponentProps } from './dateTimeRange'
 import { FloatActionButtonComponent, IFloatActionButtonComponentProps } from './floatActionButton'
 import { IModalComponentProps, ModalComponent } from './modal'
 import { ModalBoxStyledComponent } from './modal/modalBox'
@@ -17,7 +17,7 @@ export {
   AutocompleteClientComponent, IAutocompleteClientComponentProps,
   BreadcrumbsBaseComponent, IBreadcrumbsBaseComponentProps,
   DatePickerExtComponent, DatePickerExtComponentProps, DateTimePickerExtComponent, DateTimePickerExtComponentProps,
-  DateTimeRangeComponent, IDateTimeRangeDialogComponentProps, PeriodValuesKeys, periodsValues,
+  DateTimeRangeComponent, IDateTimeRangeDialogComponentProps, 
   FloatActionButtonComponent, IFloatActionButtonComponentProps,
   IModalComponentProps, ModalComponent,
   ModalBoxStyledComponent,
