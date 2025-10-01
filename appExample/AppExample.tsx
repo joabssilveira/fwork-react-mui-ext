@@ -1,5 +1,6 @@
 import { TableBaseComponentExample } from "./examples/tableBase"
 import { AutocompleteClientComponentExample } from "./examples/autoCompleteClient"
+import { DateTimeRangeComponentExample } from "./examples/dateTimeRange"
 
 interface IPost {
   "userId": number,
@@ -11,6 +12,7 @@ interface IPost {
 export const AppExample = () => {
   return <div style={{ padding: 20, fontFamily: '"Roboto", "Helvetica", "Arial", "sans-serif"' }}>
     <AutocompleteClientComponentExample />
+    <DateTimeRangeComponentExample />
     <TableBaseComponentExample />
   </div>
 }

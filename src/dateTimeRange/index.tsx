@@ -15,6 +15,7 @@ export interface IDateTimeRangeDialogComponentProps {
   dfProps?: {
     initValue: Moment | undefined
   }
+  hightLightPeriodKeyOnButton?: boolean
   onConfirm?: (di: Moment | undefined, df: Moment | undefined, label: string | undefined, periodValueKey?: PeriodValuesKeys) => void
 }
 
@@ -65,11 +66,8 @@ export const DateTimeRangeComponent: React.FC<IDateTimeRangeDialogComponentProps
         </Grid>
         <Grid container columns={3} spacing={2}>
           <Grid size={1}>
-            <Button variant="outlined" style={{ width: '100%', height: '100%' }}
+            <Button variant={periodValueKey == 'days_last30' ? 'contained' : 'outlined'} style={{ width: '100%', height: '100%' }}
               onClick={() => {
-                // setDi(moment().subtract(29, 'day').startOf('day'))
-                // setDf(moment().endOf('day'))
-                // setLabel('Últimos 30 dias')
                 const { di, df, label } = periodsValues['days_last30']()
                 setDi(di)
                 setDf(df)
@@ -79,11 +77,8 @@ export const DateTimeRangeComponent: React.FC<IDateTimeRangeDialogComponentProps
             >Últimos 30 dias</Button>
           </Grid>
           <Grid size={1}>
-            <Button variant="outlined" style={{ width: '100%', height: '100%' }}
+            <Button variant={periodValueKey == 'days_last14' ? 'contained' : 'outlined'} style={{ width: '100%', height: '100%' }}
               onClick={() => {
-                // setDi(moment().subtract(13, 'day').startOf('day'))
-                // setDf(moment().endOf('day'))
-                // setLabel('Últimos 14 dias')
                 const { di, df, label } = periodsValues['days_last14']()
                 setDi(di)
                 setDf(df)
@@ -93,11 +88,8 @@ export const DateTimeRangeComponent: React.FC<IDateTimeRangeDialogComponentProps
             >Últimos 14 dias</Button>
           </Grid>
           <Grid size={1}>
-            <Button variant="outlined" style={{ width: '100%', height: '100%' }}
+            <Button variant={periodValueKey == 'days_last07' ? 'contained' : 'outlined'} style={{ width: '100%', height: '100%' }}
               onClick={() => {
-                // setDi(moment().subtract(6, 'day').startOf('day'))
-                // setDf(moment().endOf('day'))
-                // setLabel('Últimos 7 dias')
                 const { di, df, label } = periodsValues['days_last07']()
                 setDi(di)
                 setDf(df)
@@ -107,12 +99,8 @@ export const DateTimeRangeComponent: React.FC<IDateTimeRangeDialogComponentProps
             >Últimos 7 dias</Button>
           </Grid>
           <Grid size={1}>
-            <Button variant="outlined" style={{ width: '100%', height: '100%' }}
+            <Button variant={periodValueKey == 'week_lastBefore' ? 'contained' : 'outlined'} style={{ width: '100%', height: '100%' }}
               onClick={() => {
-                // const start = moment().startOf('week').subtract(2, 'week').startOf('day')
-                // setDi(start)
-                // setDf(moment(start).endOf('week').endOf('day'))
-                // setLabel('Semana Retrasada')
                 const { di, df, label } = periodsValues['week_lastBefore']()
                 setDi(di)
                 setDf(df)
@@ -122,12 +110,8 @@ export const DateTimeRangeComponent: React.FC<IDateTimeRangeDialogComponentProps
             >Semana Retrasada</Button>
           </Grid>
           <Grid size={1}>
-            <Button variant="outlined" style={{ width: '100%', height: '100%' }}
+            <Button variant={periodValueKey == 'week_last' ? 'contained' : 'outlined'} style={{ width: '100%', height: '100%' }}
               onClick={() => {
-                // const start = moment().startOf('week').subtract(1, 'week').startOf('day')
-                // setDi(start)
-                // setDf(moment(start).endOf('week').endOf('day'))
-                // setLabel('Semana Passada')
                 const { di, df, label } = periodsValues['week_last']()
                 setDi(di)
                 setDf(df)
@@ -137,11 +121,8 @@ export const DateTimeRangeComponent: React.FC<IDateTimeRangeDialogComponentProps
             >Semana Passada</Button>
           </Grid>
           <Grid size={1}>
-            <Button variant="outlined" style={{ width: '100%', height: '100%' }}
+            <Button variant={periodValueKey == 'week_this' ? 'contained' : 'outlined'} style={{ width: '100%', height: '100%' }}
               onClick={() => {
-                // setDi(moment().startOf('week').startOf('day'))
-                // setDf(moment().endOf('day'))
-                // setLabel('Esta Semana')
                 const { di, df, label } = periodsValues['week_this']()
                 setDi(di)
                 setDf(df)
@@ -151,12 +132,8 @@ export const DateTimeRangeComponent: React.FC<IDateTimeRangeDialogComponentProps
             >Esta Semana</Button>
           </Grid>
           <Grid size={1}>
-            <Button variant="outlined" style={{ width: '100%', height: '100%' }}
+            <Button variant={periodValueKey == 'month_lastBefore' ? 'contained' : 'outlined'} style={{ width: '100%', height: '100%' }}
               onClick={() => {
-                // const start = moment().startOf('month').subtract(2, 'month').startOf('day')
-                // setDi(start)
-                // setDf(moment(start).endOf('month').endOf('day'))
-                // setLabel('Mês Retrasado')
                 const { di, df, label } = periodsValues['month_lastBefore']()
                 setDi(di)
                 setDf(df)
@@ -166,12 +143,8 @@ export const DateTimeRangeComponent: React.FC<IDateTimeRangeDialogComponentProps
             >Mês Retrasado</Button>
           </Grid>
           <Grid size={1}>
-            <Button variant="outlined" style={{ width: '100%', height: '100%' }}
+            <Button variant={periodValueKey == 'month_last' ? 'contained' : 'outlined'} style={{ width: '100%', height: '100%' }}
               onClick={() => {
-                // const start = moment().startOf('month').subtract(1, 'month').startOf('day')
-                // setDi(start)
-                // setDf(moment(start).endOf('month').endOf('day'))
-                // setLabel('Mês Passado')
                 const { di, df, label } = periodsValues['month_last']()
                 setDi(di)
                 setDf(df)
@@ -181,11 +154,8 @@ export const DateTimeRangeComponent: React.FC<IDateTimeRangeDialogComponentProps
             >Mês Passado</Button>
           </Grid>
           <Grid size={1}>
-            <Button variant="outlined" style={{ width: '100%', height: '100%' }}
+            <Button variant={periodValueKey == 'month_this' ? 'contained' : 'outlined'} style={{ width: '100%', height: '100%' }}
               onClick={() => {
-                // setDi(moment().startOf('month').startOf('day'))
-                // setDf(moment().endOf('day'))
-                // setLabel('Este Mês')
                 const { di, df, label } = periodsValues['month_this']()
                 setDi(di)
                 setDf(df)
@@ -195,12 +165,8 @@ export const DateTimeRangeComponent: React.FC<IDateTimeRangeDialogComponentProps
             >Este Mês</Button>
           </Grid>
           <Grid size={1}>
-            <Button variant="outlined" style={{ width: '100%', height: '100%' }}
+            <Button variant={periodValueKey == 'quarter_lastBefore' ? 'contained' : 'outlined'} style={{ width: '100%', height: '100%' }}
               onClick={() => {
-                // const start = moment().startOf('quarter').subtract(2, 'quarter').startOf('day')
-                // setDi(start)
-                // setDf(moment(start).endOf('quarter').endOf('day'))
-                // setLabel('Penúltimo Trimestre')
                 const { di, df, label } = periodsValues['quarter_lastBefore']()
                 setDi(di)
                 setDf(df)
@@ -210,12 +176,8 @@ export const DateTimeRangeComponent: React.FC<IDateTimeRangeDialogComponentProps
             >Penúltimo Trimestre</Button>
           </Grid>
           <Grid size={1}>
-            <Button variant="outlined" style={{ width: '100%', height: '100%' }}
+            <Button variant={periodValueKey == 'quarter_last' ? 'contained' : 'outlined'} style={{ width: '100%', height: '100%' }}
               onClick={() => {
-                // const start = moment().startOf('quarter').subtract(1, 'quarter').startOf('day')
-                // setDi(start)
-                // setDf(moment(start).endOf('quarter').endOf('day'))
-                // setLabel('Trimestre Passado')
                 const { di, df, label } = periodsValues['quarter_last']()
                 setDi(di)
                 setDf(df)
@@ -225,11 +187,8 @@ export const DateTimeRangeComponent: React.FC<IDateTimeRangeDialogComponentProps
             >Trimestre Passado</Button>
           </Grid>
           <Grid size={1}>
-            <Button variant="outlined" style={{ width: '100%', height: '100%' }}
+            <Button variant={periodValueKey == 'quarter_this' ? 'contained' : 'outlined'} style={{ width: '100%', height: '100%' }}
               onClick={() => {
-                // setDi(moment().startOf('quarter').startOf('day'))
-                // setDf(moment().endOf('day'))
-                // setLabel('Este Trimestre')
                 const { di, df, label } = periodsValues['quarter_this']()
                 setDi(di)
                 setDf(df)
@@ -239,12 +198,8 @@ export const DateTimeRangeComponent: React.FC<IDateTimeRangeDialogComponentProps
             >Este Trimestre</Button>
           </Grid>
           <Grid size={1}>
-            <Button variant="outlined" style={{ width: '100%', height: '100%' }}
+            <Button variant={periodValueKey == 'year_lastBefore' ? 'contained' : 'outlined'} style={{ width: '100%', height: '100%' }}
               onClick={() => {
-                // const start = moment().startOf('year').subtract(2, 'year').startOf('day')
-                // setDi(start)
-                // setDf(moment(start).endOf('year').endOf('day'))
-                // setLabel('Penúltimo Ano')
                 const { di, df, label } = periodsValues['year_lastBefore']()
                 setDi(di)
                 setDf(df)
@@ -254,12 +209,8 @@ export const DateTimeRangeComponent: React.FC<IDateTimeRangeDialogComponentProps
             >Penúltimo Ano</Button>
           </Grid>
           <Grid size={1}>
-            <Button variant="outlined" style={{ width: '100%', height: '100%' }}
+            <Button variant={periodValueKey == 'year_last' ? 'contained' : 'outlined'} style={{ width: '100%', height: '100%' }}
               onClick={() => {
-                // const start = moment().startOf('year').subtract(1, 'year').startOf('day')
-                // setDi(start)
-                // setDf(moment(start).endOf('year').endOf('day'))
-                // setLabel('Ano Passado')
                 const { di, df, label } = periodsValues['year_last']()
                 setDi(di)
                 setDf(df)
@@ -269,11 +220,8 @@ export const DateTimeRangeComponent: React.FC<IDateTimeRangeDialogComponentProps
             >Ano Passado</Button>
           </Grid>
           <Grid size={1}>
-            <Button variant="outlined" style={{ width: '100%', height: '100%' }}
+            <Button variant={periodValueKey == 'year_this' ? 'contained' : 'outlined'} style={{ width: '100%', height: '100%' }}
               onClick={() => {
-                // setDi(moment().startOf('year').startOf('day'))
-                // setDf(moment().endOf('day'))
-                // setLabel('Este Ano')
                 const { di, df, label } = periodsValues['year_this']()
                 setDi(di)
                 setDf(df)
@@ -283,11 +231,8 @@ export const DateTimeRangeComponent: React.FC<IDateTimeRangeDialogComponentProps
             >Este Ano</Button>
           </Grid>
           <Grid size={1}>
-            <Button variant="contained" style={{ width: '100%', height: '100%' }}
+            <Button variant={periodValueKey == 'today' ? 'contained' : 'outlined'} style={{ width: '100%', height: '100%' }}
               onClick={() => {
-                // setDi(moment().startOf('year').startOf('day'))
-                // setDf(moment().endOf('day'))
-                // setLabel('Este Ano')
                 const { di, df, label } = periodsValues['today']()
                 setDi(di)
                 setDf(df)
