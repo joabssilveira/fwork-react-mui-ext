@@ -8,28 +8,32 @@ import { ModalComponent } from "../modal";
 
 export interface IDateTimeRangeDialogComponentProps {
   style?: React.CSSProperties | undefined,
-  initLabel?: string
+  // initLabel?: string
+  initPeriodValueKey?: PeriodValuesKeys
   diProps?: {
     initValue: Moment | undefined
   }
   dfProps?: {
     initValue: Moment | undefined
   }
-  hightLightPeriodKeyOnButton?: boolean
   onConfirm?: (di: Moment | undefined, df: Moment | undefined, label: string | undefined, periodValueKey?: PeriodValuesKeys) => void
 }
 
 export const DateTimeRangeComponent: React.FC<IDateTimeRangeDialogComponentProps> = ({
   style,
-  initLabel,
+  // initLabel,
+  initPeriodValueKey,
   diProps,
   dfProps,
   onConfirm,
 }) => {
-  const [di, setDi] = useState(diProps?.initValue)
-  const [df, setDf] = useState(dfProps?.initValue)
-  const [label, setLabel] = useState(initLabel ?? '')
-  const [periodValueKey, setPeriodValueKey] = useState<PeriodValuesKeys>()
+  const valuesFromInitPeriodValuekey = initPeriodValueKey ? periodsValues[initPeriodValueKey]() : undefined
+
+  const [di, setDi] = useState(valuesFromInitPeriodValuekey?.di ?? diProps?.initValue)
+  const [df, setDf] = useState(valuesFromInitPeriodValuekey?.df ?? dfProps?.initValue)
+  // const [label, setLabel] = useState(valuesFromInitPeriodValuekey?.label ?? initLabel ?? '')
+  const [label, setLabel] = useState(valuesFromInitPeriodValuekey?.label ?? '')
+  const [periodValueKey, setPeriodValueKey] = useState<PeriodValuesKeys | undefined>(initPeriodValueKey)
 
   return <>
     <ModalComponent
