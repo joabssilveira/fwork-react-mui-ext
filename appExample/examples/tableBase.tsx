@@ -18,7 +18,7 @@ export const TableBaseComponentExample = () => {
         numberColumn: 98.7
     }, {
         textColumn: 'text value b',
-        numberColumn: 65.43
+        numberColumn: 6543.21
     }]
 
     return <>
