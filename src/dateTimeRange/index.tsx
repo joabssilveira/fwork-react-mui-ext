@@ -8,8 +8,7 @@ import { ModalComponent } from "../modal";
 
 export interface IDateTimeRangeDialogComponentProps {
   style?: React.CSSProperties | undefined,
-  // initLabel?: string
-  initPeriodValueKey?: PeriodOptionsNames
+  initPeriodOptionsName?: PeriodOptionsNames
   diProps?: {
     initValue: Moment | undefined
   }
@@ -21,19 +20,17 @@ export interface IDateTimeRangeDialogComponentProps {
 
 export const DateTimeRangeComponent: React.FC<IDateTimeRangeDialogComponentProps> = ({
   style,
-  // initLabel,
-  initPeriodValueKey,
+  initPeriodOptionsName,
   diProps,
   dfProps,
   onConfirm,
 }) => {
-  const valuesFromInitPeriodValuekey = initPeriodValueKey ? periodOptions[initPeriodValueKey]() : undefined
+  const valuesFromInitPeriodValuekey = initPeriodOptionsName ? periodOptions[initPeriodOptionsName]() : undefined
 
   const [di, setDi] = useState(valuesFromInitPeriodValuekey?.di ?? diProps?.initValue)
   const [df, setDf] = useState(valuesFromInitPeriodValuekey?.df ?? dfProps?.initValue)
-  // const [label, setLabel] = useState(valuesFromInitPeriodValuekey?.label ?? initLabel ?? '')
   const [label, setLabel] = useState(valuesFromInitPeriodValuekey?.label ?? '')
-  const [periodValueKey, setPeriodValueKey] = useState<PeriodOptionsNames | undefined>(initPeriodValueKey)
+  const [periodValueKey, setPeriodValueKey] = useState<PeriodOptionsNames | undefined>(initPeriodOptionsName)
 
   return <>
     <ModalComponent
