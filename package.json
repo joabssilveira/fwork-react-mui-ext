@@ -8,7 +8,7 @@
 		"@mui/x-date-pickers": "^7.27.1",
 		"@types/react": "^18.3.12",
 		"@types/react-dom": "^18.3.1",
-		"fwork-jsts-common": "^2.0.14",
+		"fwork-jsts-common": "^2.0.15",
 		"notistack": "^3.0.1",
 		"react": "^17.0.0 || ^18.0.0",
 		"react-dom": "^17.0.0 || ^18.0.0",
@@ -67,7 +67,7 @@
 		"release:minor": "npm run build && standard-version -m && git add CHANGELOG.md && git commit -m \"updated CHANGELOG.md\" && npm version minor && git push origin && git push origin --tags && npm publish --access public",
 		"release:patch": "npm run build && standard-version -p && git add CHANGELOG.md && git commit -m \"updated CHANGELOG.md\" && npm version patch && git push origin && git push origin --tags && npm publish --access public"
 	},
-	"version": "2.0.27",
+	"version": "2.0.28",
 	"exports": {
 		".": {
 			"require": "./dist/cjs/index.js",
