@@ -1,6 +1,6 @@
 import { Button, Grid2 as Grid } from "@mui/material";
 import { DateTimeValidationError, PickerChangeHandlerContext } from "@mui/x-date-pickers";
-import { periodsValues, PeriodValuesKeys } from "fwork-jsts-common";
+import { periodOptions, PeriodOptionsNames } from "fwork-jsts-common";
 import { Moment } from "moment";
 import React, { useState } from "react";
 import { DatePickerExtComponent } from "../datePicker";
@@ -9,14 +9,14 @@ import { ModalComponent } from "../modal";
 export interface IDateTimeRangeDialogComponentProps {
   style?: React.CSSProperties | undefined,
   // initLabel?: string
-  initPeriodValueKey?: PeriodValuesKeys
+  initPeriodValueKey?: PeriodOptionsNames
   diProps?: {
     initValue: Moment | undefined
   }
   dfProps?: {
     initValue: Moment | undefined
   }
-  onConfirm?: (di: Moment | undefined, df: Moment | undefined, label: string | undefined, periodValueKey?: PeriodValuesKeys) => void
+  onConfirm?: (di: Moment | undefined, df: Moment | undefined, label: string | undefined, periodValueKey?: PeriodOptionsNames) => void
 }
 
 export const DateTimeRangeComponent: React.FC<IDateTimeRangeDialogComponentProps> = ({
@@ -27,13 +27,13 @@ export const DateTimeRangeComponent: React.FC<IDateTimeRangeDialogComponentProps
   dfProps,
   onConfirm,
 }) => {
-  const valuesFromInitPeriodValuekey = initPeriodValueKey ? periodsValues[initPeriodValueKey]() : undefined
+  const valuesFromInitPeriodValuekey = initPeriodValueKey ? periodOptions[initPeriodValueKey]() : undefined
 
   const [di, setDi] = useState(valuesFromInitPeriodValuekey?.di ?? diProps?.initValue)
   const [df, setDf] = useState(valuesFromInitPeriodValuekey?.df ?? dfProps?.initValue)
   // const [label, setLabel] = useState(valuesFromInitPeriodValuekey?.label ?? initLabel ?? '')
   const [label, setLabel] = useState(valuesFromInitPeriodValuekey?.label ?? '')
-  const [periodValueKey, setPeriodValueKey] = useState<PeriodValuesKeys | undefined>(initPeriodValueKey)
+  const [periodValueKey, setPeriodValueKey] = useState<PeriodOptionsNames | undefined>(initPeriodValueKey)
 
   return <>
     <ModalComponent
@@ -72,7 +72,7 @@ export const DateTimeRangeComponent: React.FC<IDateTimeRangeDialogComponentProps
           <Grid size={1}>
             <Button variant={periodValueKey == 'days_last30' ? 'contained' : 'outlined'} style={{ width: '100%', height: '100%' }}
               onClick={() => {
-                const { di, df, label } = periodsValues['days_last30']()
+                const { di, df, label } = periodOptions['days_last30']()
                 setDi(di)
                 setDf(df)
                 setLabel(label)
@@ -83,7 +83,7 @@ export const DateTimeRangeComponent: React.FC<IDateTimeRangeDialogComponentProps
           <Grid size={1}>
             <Button variant={periodValueKey == 'days_last14' ? 'contained' : 'outlined'} style={{ width: '100%', height: '100%' }}
               onClick={() => {
-                const { di, df, label } = periodsValues['days_last14']()
+                const { di, df, label } = periodOptions['days_last14']()
                 setDi(di)
                 setDf(df)
                 setLabel(label)
@@ -94,7 +94,7 @@ export const DateTimeRangeComponent: React.FC<IDateTimeRangeDialogComponentProps
           <Grid size={1}>
             <Button variant={periodValueKey == 'days_last07' ? 'contained' : 'outlined'} style={{ width: '100%', height: '100%' }}
               onClick={() => {
-                const { di, df, label } = periodsValues['days_last07']()
+                const { di, df, label } = periodOptions['days_last07']()
                 setDi(di)
                 setDf(df)
                 setLabel(label)
@@ -105,7 +105,7 @@ export const DateTimeRangeComponent: React.FC<IDateTimeRangeDialogComponentProps
           <Grid size={1}>
             <Button variant={periodValueKey == 'week_lastBefore' ? 'contained' : 'outlined'} style={{ width: '100%', height: '100%' }}
               onClick={() => {
-                const { di, df, label } = periodsValues['week_lastBefore']()
+                const { di, df, label } = periodOptions['week_lastBefore']()
                 setDi(di)
                 setDf(df)
                 setLabel(label)
@@ -116,7 +116,7 @@ export const DateTimeRangeComponent: React.FC<IDateTimeRangeDialogComponentProps
           <Grid size={1}>
             <Button variant={periodValueKey == 'week_last' ? 'contained' : 'outlined'} style={{ width: '100%', height: '100%' }}
               onClick={() => {
-                const { di, df, label } = periodsValues['week_last']()
+                const { di, df, label } = periodOptions['week_last']()
                 setDi(di)
                 setDf(df)
                 setLabel(label)
@@ -127,7 +127,7 @@ export const DateTimeRangeComponent: React.FC<IDateTimeRangeDialogComponentProps
           <Grid size={1}>
             <Button variant={periodValueKey == 'week_this' ? 'contained' : 'outlined'} style={{ width: '100%', height: '100%' }}
               onClick={() => {
-                const { di, df, label } = periodsValues['week_this']()
+                const { di, df, label } = periodOptions['week_this']()
                 setDi(di)
                 setDf(df)
                 setLabel(label)
@@ -138,7 +138,7 @@ export const DateTimeRangeComponent: React.FC<IDateTimeRangeDialogComponentProps
           <Grid size={1}>
             <Button variant={periodValueKey == 'month_lastBefore' ? 'contained' : 'outlined'} style={{ width: '100%', height: '100%' }}
               onClick={() => {
-                const { di, df, label } = periodsValues['month_lastBefore']()
+                const { di, df, label } = periodOptions['month_lastBefore']()
                 setDi(di)
                 setDf(df)
                 setLabel(label)
@@ -149,7 +149,7 @@ export const DateTimeRangeComponent: React.FC<IDateTimeRangeDialogComponentProps
           <Grid size={1}>
             <Button variant={periodValueKey == 'month_last' ? 'contained' : 'outlined'} style={{ width: '100%', height: '100%' }}
               onClick={() => {
-                const { di, df, label } = periodsValues['month_last']()
+                const { di, df, label } = periodOptions['month_last']()
                 setDi(di)
                 setDf(df)
                 setLabel(label)
@@ -160,7 +160,7 @@ export const DateTimeRangeComponent: React.FC<IDateTimeRangeDialogComponentProps
           <Grid size={1}>
             <Button variant={periodValueKey == 'month_this' ? 'contained' : 'outlined'} style={{ width: '100%', height: '100%' }}
               onClick={() => {
-                const { di, df, label } = periodsValues['month_this']()
+                const { di, df, label } = periodOptions['month_this']()
                 setDi(di)
                 setDf(df)
                 setLabel(label)
@@ -171,7 +171,7 @@ export const DateTimeRangeComponent: React.FC<IDateTimeRangeDialogComponentProps
           <Grid size={1}>
             <Button variant={periodValueKey == 'quarter_lastBefore' ? 'contained' : 'outlined'} style={{ width: '100%', height: '100%' }}
               onClick={() => {
-                const { di, df, label } = periodsValues['quarter_lastBefore']()
+                const { di, df, label } = periodOptions['quarter_lastBefore']()
                 setDi(di)
                 setDf(df)
                 setLabel(label)
@@ -182,7 +182,7 @@ export const DateTimeRangeComponent: React.FC<IDateTimeRangeDialogComponentProps
           <Grid size={1}>
             <Button variant={periodValueKey == 'quarter_last' ? 'contained' : 'outlined'} style={{ width: '100%', height: '100%' }}
               onClick={() => {
-                const { di, df, label } = periodsValues['quarter_last']()
+                const { di, df, label } = periodOptions['quarter_last']()
                 setDi(di)
                 setDf(df)
                 setLabel(label)
@@ -193,7 +193,7 @@ export const DateTimeRangeComponent: React.FC<IDateTimeRangeDialogComponentProps
           <Grid size={1}>
             <Button variant={periodValueKey == 'quarter_this' ? 'contained' : 'outlined'} style={{ width: '100%', height: '100%' }}
               onClick={() => {
-                const { di, df, label } = periodsValues['quarter_this']()
+                const { di, df, label } = periodOptions['quarter_this']()
                 setDi(di)
                 setDf(df)
                 setLabel(label)
@@ -204,7 +204,7 @@ export const DateTimeRangeComponent: React.FC<IDateTimeRangeDialogComponentProps
           <Grid size={1}>
             <Button variant={periodValueKey == 'year_lastBefore' ? 'contained' : 'outlined'} style={{ width: '100%', height: '100%' }}
               onClick={() => {
-                const { di, df, label } = periodsValues['year_lastBefore']()
+                const { di, df, label } = periodOptions['year_lastBefore']()
                 setDi(di)
                 setDf(df)
                 setLabel(label)
@@ -215,7 +215,7 @@ export const DateTimeRangeComponent: React.FC<IDateTimeRangeDialogComponentProps
           <Grid size={1}>
             <Button variant={periodValueKey == 'year_last' ? 'contained' : 'outlined'} style={{ width: '100%', height: '100%' }}
               onClick={() => {
-                const { di, df, label } = periodsValues['year_last']()
+                const { di, df, label } = periodOptions['year_last']()
                 setDi(di)
                 setDf(df)
                 setLabel(label)
@@ -226,7 +226,7 @@ export const DateTimeRangeComponent: React.FC<IDateTimeRangeDialogComponentProps
           <Grid size={1}>
             <Button variant={periodValueKey == 'year_this' ? 'contained' : 'outlined'} style={{ width: '100%', height: '100%' }}
               onClick={() => {
-                const { di, df, label } = periodsValues['year_this']()
+                const { di, df, label } = periodOptions['year_this']()
                 setDi(di)
                 setDf(df)
                 setLabel(label)
@@ -237,7 +237,7 @@ export const DateTimeRangeComponent: React.FC<IDateTimeRangeDialogComponentProps
           <Grid size={1}>
             <Button variant={periodValueKey == 'today' ? 'contained' : 'outlined'} style={{ width: '100%', height: '100%' }}
               onClick={() => {
-                const { di, df, label } = periodsValues['today']()
+                const { di, df, label } = periodOptions['today']()
                 setDi(di)
                 setDf(df)
                 setLabel(label)
