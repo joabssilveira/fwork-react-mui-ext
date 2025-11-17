@@ -21,6 +21,7 @@ export interface IAutocompleteClientComponentProps<T extends {}> extends Partial
   onChangeItem?: (data?: T | null) => void,
   textFieldProps?: TextFieldProps,
   getOnInit?: boolean,
+  getAllOnOpen?: boolean,
   fitDropDownWidth?: boolean,
 }
 
@@ -54,8 +55,14 @@ export const AutocompleteClientComponent = <T extends {},>(props: IAutocompleteC
     return undefined
   }
 
-  const handleOpen = () => {
+  const handleOpen = async () => {
     setOpen(true);
+
+    // Chama a API ao abrir
+    if (props.getAllOnOpen) {
+      const dataResponse = await getData('', false);
+      setOptions(dataResponse ?? []);
+    }
   };
 
   function getNestedProperty<T>(obj: T, path: string): any {
@@ -65,7 +72,7 @@ export const AutocompleteClientComponent = <T extends {},>(props: IAutocompleteC
   React.useEffect(() => {
     if (getOnInit)
       (async () => {
-        let dataResponse = await getData('', false)
+        const dataResponse = await getData('', false)
         setOptions(dataResponse ?? [])
       })();
   }, [])
@@ -85,11 +92,29 @@ export const AutocompleteClientComponent = <T extends {},>(props: IAutocompleteC
     setOpen(false);
   };
 
+  // new...
+  const typingTimeout = React.useRef<NodeJS.Timeout>();
+
+  const handleInputChange = (value: string) => {
+    setInputValue(value);
+
+    if (typingTimeout.current) clearTimeout(typingTimeout.current);
+
+    typingTimeout.current = setTimeout(async () => {
+      const dataResponse = await getData(value, false);
+      setOptions(dataResponse ?? []);
+    }, 200); // debounce
+  };
+  // ...new
+
   return (
     <>
       <Autocomplete
         {...rest}
         // PopperComponent={CustomPopper}
+        // new...
+        filterOptions={(options) => options}
+        // ...new
         slots={{
           popper: fitDropDownWidth ? CustomPopper : undefined
         }}
@@ -98,7 +123,7 @@ export const AutocompleteClientComponent = <T extends {},>(props: IAutocompleteC
             minWidth: fitDropDownWidth ? "fit-content" : undefined,
           },
         }}
-
+        noOptionsText='Nenhum item'
         open={rest.open ?? open}
         onOpen={rest.onOpen ?? handleOpen}
         onClose={rest.onClose ?? handleClose}
@@ -118,20 +143,6 @@ export const AutocompleteClientComponent = <T extends {},>(props: IAutocompleteC
             onChangeItem(newValue)
         })}
         renderInput={rest.renderInput ?? ((params) => (
-          // <TextField
-          //   {...params}
-          //   {...textFieldProps}
-          //   InputProps={{
-          //     ...params.InputProps,
-          //     endAdornment: (
-          //       <>
-          //         {loading ? <CircularProgress color="inherit" size={20} /> : null}
-          //         {params.InputProps?.endAdornment}
-          //       </>
-          //     ),
-          //   }}
-          //   onChange={(e) => setInputValue(e.target.value)}
-          // />
           <TextField
             {...params}
             {...textFieldProps}
@@ -146,7 +157,10 @@ export const AutocompleteClientComponent = <T extends {},>(props: IAutocompleteC
                 ),
               },
             }}
-            onChange={(e) => setInputValue(e.target.value)}
+            // new...
+            // onChange={(e) => setInputValue(e.target.value)}
+            onChange={(e) => handleInputChange(e.target.value)}
+            // ...new
           />
         ))}
         onKeyDown={rest.onKeyDown ?? (async (event) => {
