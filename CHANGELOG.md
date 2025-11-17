@@ -2,6 +2,8 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.0.30](https://github.com/joabssilveira/fwork-react-mui-ext/compare/v2.0.29...v2.0.30) (2025-11-17)
+
 ### [2.0.29](https://github.com/joabssilveira/fwork-react-mui-ext/compare/v2.0.28...v2.0.29) (2025-10-03)
 
 ### [2.0.28](https://github.com/joabssilveira/fwork-react-mui-ext/compare/v2.0.27...v2.0.28) (2025-10-03)
