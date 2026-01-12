@@ -6,31 +6,59 @@ import CloseIcon from '@mui/icons-material/Close'
 import DeleteIcon from '@mui/icons-material/Delete'
 import EditIcon from '@mui/icons-material/Edit'
 import ExecuteIcon from '@mui/icons-material/PlayArrow'
-import { CircularProgress } from '@mui/material'
+import { CircularProgress, Tooltip, TooltipProps } from '@mui/material'
 import SpeedDial, { SpeedDialProps } from '@mui/material/SpeedDial'
 import SpeedDialAction from '@mui/material/SpeedDialAction'
 import SpeedDialIcon from '@mui/material/SpeedDialIcon'
 import * as React from 'react'
 
+export interface TooltipPropsExt extends Omit<TooltipProps, 'children'> {
+
+}
+
 export interface IFloatActionButtonComponentProps extends SpeedDialProps {
-  onCancelClick?: () => void,
-  onConfirmClick?: () => void,
-  onDeleteClick?: () => void,
-  onAddClick?: () => void,
-  onEditClick?: () => void,
-  onExecuteClick?: () => void,
+  cancelProps?: {
+    toolTip?: TooltipPropsExt,
+    onClick?: () => void,
+  },
+  confirmProps?: {
+    toolTip?: TooltipPropsExt,
+    onClick?: () => void,
+  },
+  deleteProps?: {
+    toolTip?: TooltipPropsExt,
+    onClick?: () => void,
+  },
+  addProps?: {
+    toolTip?: TooltipPropsExt,
+    onClick?: () => void,
+  },
+  editProps?: {
+    toolTip?: TooltipPropsExt,
+    onClick?: () => void,
+  },
+  executeProps?: {
+    toolTip?: TooltipPropsExt,
+    onClick?: () => void,
+  },
   icon?: React.ReactNode,
   progress?: Boolean,
+  customActions?: {
+    content: React.ReactNode,
+    toolTip?: TooltipPropsExt,
+    onClick: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void
+  }[]
 }
 
 export const FloatActionButtonComponent: React.FC<IFloatActionButtonComponentProps> = ({
-  onCancelClick,
-  onConfirmClick,
-  onDeleteClick,
-  onAddClick,
-  onEditClick,
-  onExecuteClick,
+  cancelProps,
+  confirmProps,
+  deleteProps,
+  addProps,
+  editProps,
+  executeProps,
   progress,
+  customActions,
   ...rest
 }) => {
   const [open, setOpen] = React.useState(false)
@@ -48,64 +76,76 @@ export const FloatActionButtonComponent: React.FC<IFloatActionButtonComponentPro
     onOpen={handleOpen}
     open={open}>
 
-    {onCancelClick && <SpeedDialAction
-      icon={
+    {customActions?.map(a => <SpeedDialAction
+      icon={<Tooltip {...(a.toolTip ?? { title: '' })}>
+       <>{a.content}</>
+      </Tooltip>
+      }
+      onClick={handleClose}
+    />)}
+
+    {cancelProps && <SpeedDialAction
+      icon={<Tooltip {...(cancelProps.toolTip ?? { title: '' })}>
         <CloseIcon onClick={() => {
           handleClose()
-          onCancelClick()
+          cancelProps?.onClick?.()
         }} />
+      </Tooltip>
       }
       onClick={handleClose}
     />}
 
-    {onConfirmClick && <SpeedDialAction
-      icon={
-        <CheckIcon style={{
-          backgroundColor: 'transparent',
-        }}
-          onClick={() => {
-            handleClose()
-            onConfirmClick()
-          }} />}
+    {confirmProps && <SpeedDialAction
+      icon={<Tooltip {...(confirmProps.toolTip ?? { title: '' })}>
+        <CheckIcon onClick={() => {
+          handleClose()
+          confirmProps?.onClick?.()
+        }} />
+      </Tooltip>
+      }
       onClick={handleClose}
     />}
 
-    {onDeleteClick && <SpeedDialAction
-      icon={
+    {deleteProps && <SpeedDialAction
+      icon={<Tooltip {...(deleteProps.toolTip ?? { title: '' })}>
         <DeleteIcon onClick={() => {
           handleClose()
-          onDeleteClick()
+          deleteProps?.onClick?.()
         }} />
+      </Tooltip>
       }
       onClick={handleClose}
     />}
 
-    {onAddClick && <SpeedDialAction
-      icon={
+    {addProps && <SpeedDialAction
+      icon={<Tooltip {...(addProps.toolTip ?? { title: '' })}>
         <AddIcon onClick={() => {
           handleClose()
-          onAddClick()
+          addProps?.onClick?.()
         }} />
+      </Tooltip>
       }
       onClick={handleClose}
     />}
 
-    {onEditClick && <SpeedDialAction
-      icon={
+    {editProps && <SpeedDialAction
+      icon={<Tooltip {...(editProps.toolTip ?? { title: '' })}>
         <EditIcon onClick={() => {
           handleClose()
-          onEditClick()
+          editProps?.onClick?.()
         }} />
+      </Tooltip>
       }
       onClick={handleClose}
     />}
 
-    {onExecuteClick && <SpeedDialAction
-      icon={
+    {executeProps && <SpeedDialAction
+      icon={<Tooltip {...(executeProps.toolTip ?? { title: '' })}>
         <ExecuteIcon onClick={() => {
           handleClose()
-          onExecuteClick()
+          executeProps?.onClick?.()
         }} />
+      </Tooltip>
       }
       onClick={handleClose}
     />}

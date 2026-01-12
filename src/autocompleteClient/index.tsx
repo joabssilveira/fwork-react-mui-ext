@@ -30,7 +30,7 @@ const CustomPopper = (props: PopperProps) => {
 };
 
 export const AutocompleteClientComponent = <T extends {},>(props: IAutocompleteClientComponentProps<T>) => {
-  const { initKeyValue, onChangeItem, inputValueKeyName, onGetData, textFieldProps, getOnInit, fitDropDownWidth, ...rest } = props
+  const { initKeyValue, onChangeItem, inputValueKeyName, onGetData, textFieldProps, getOnInit, getAllOnOpen, fitDropDownWidth, ...rest } = props
 
   const [inputValue, setInputValue] = React.useState('');
   const [open, setOpen] = React.useState(false);
@@ -59,7 +59,7 @@ export const AutocompleteClientComponent = <T extends {},>(props: IAutocompleteC
     setOpen(true);
 
     // Chama a API ao abrir
-    if (props.getAllOnOpen) {
+    if (getAllOnOpen) {
       const dataResponse = await getData('', false);
       setOptions(dataResponse ?? []);
     }
@@ -113,17 +113,19 @@ export const AutocompleteClientComponent = <T extends {},>(props: IAutocompleteC
         {...rest}
         // PopperComponent={CustomPopper}
         // new...
-        filterOptions={(options) => options}
+        filterOptions={rest.filterOptions ?? ((options) => options)}
         // ...new
         slots={{
-          popper: fitDropDownWidth ? CustomPopper : undefined
+          popper: fitDropDownWidth ? CustomPopper : undefined,
+          ...rest.slots
         }}
         sx={{
           [`& .${autocompleteClasses.paper}`]: {
             minWidth: fitDropDownWidth ? "fit-content" : undefined,
           },
+          ...rest.sx
         }}
-        noOptionsText='Nenhum item'
+        noOptionsText={rest.noOptionsText ?? 'Nenhum item'}
         open={rest.open ?? open}
         onOpen={rest.onOpen ?? handleOpen}
         onClose={rest.onClose ?? handleClose}
@@ -131,7 +133,7 @@ export const AutocompleteClientComponent = <T extends {},>(props: IAutocompleteC
           return getNestedProperty(option, inputValueKeyName) === getNestedProperty(value, inputValueKeyName)
         })}
         getOptionLabel={rest.getOptionLabel ?? ((option) => {
-          const result = getNestedProperty(option, inputValueKeyName)
+          const result = getNestedProperty(option, inputValueKeyName) ?? ''
           return result
         })}
         options={rest.options ?? options}

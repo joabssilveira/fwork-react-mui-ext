@@ -3,6 +3,7 @@ import { useState } from "react";
 import { AutocompleteClientComponentExample } from "./examples/autoCompleteClient";
 import { DateTimeRangeComponentExample } from "./examples/dateTimeRange";
 import { TableBaseComponentExample } from "./examples/tableBase";
+import { FloatActionButtonComponentExample } from "./examples/floatActionButton";
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -57,6 +58,6 @@ export const AppExample = () => {
     <CustomTabPanel value={value} index={2}>
       Item Three
     </CustomTabPanel>
-
+    <FloatActionButtonComponentExample />
   </div>
 }
