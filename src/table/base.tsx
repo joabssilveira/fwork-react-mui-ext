@@ -1,4 +1,4 @@
-import { LabelDisplayedRowsArgs, Table, TableBody, TableBodyProps, TablePagination, TablePaginationProps, TableProps } from '@mui/material'
+import { LabelDisplayedRowsArgs, Table, TableBody, TableBodyProps, TableFooter, TablePagination, TablePaginationProps, TableProps } from '@mui/material'
 import * as locales from '@mui/material/locale'
 import { ThemeProvider, createTheme, useTheme } from '@mui/material/styles'
 import React, { ReactNode, useEffect, useMemo, useState } from 'react'
@@ -10,6 +10,7 @@ export interface TableBaseComponentProps<T> {
   downloadCsv?: boolean,
   bodyList: T[],
   header?: ReactNode,
+  footer?: ReactNode,
 
   wrapperProps?: React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>
   tableShadowContainerProps?: React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>,
@@ -114,6 +115,7 @@ export const TableBaseComponent: React.FC<TableBaseComponentProps<any>> = <T,>(p
                 return props.bodyRowBuilder(item, idx)
               })}
             </TableBody>
+            {items.length ? props.footer : <></>}
           </Table>
         </div >
       </div>
@@ -128,7 +130,7 @@ export const TableBaseComponent: React.FC<TableBaseComponentProps<any>> = <T,>(p
             labelDisplayedRows={(paginationInfo: LabelDisplayedRowsArgs) => {
               return props.paginationProps?.labelDisplayedRows ? props.paginationProps.labelDisplayedRows(paginationInfo) : handleLabelDisplayedRows(paginationInfo)
             }}
-            
+
             ActionsComponent={(subprops) => {
               const CustomActions = props.paginationProps?.ActionsComponent;
               return (
