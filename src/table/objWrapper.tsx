@@ -79,5 +79,5 @@ export const TableObjWrapperComponent = (props: ObjInTableComponentProps) => {
 
 export const StyledTableTitleCell = styled(StyledTableCell)(() => ({
   fontWeight: 'bold',
-  whiteSpace: 'nowrap'
+  whiteSpace: 'nowrap',
 }))

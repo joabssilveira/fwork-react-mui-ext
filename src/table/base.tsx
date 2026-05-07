@@ -1,4 +1,4 @@
-import { LabelDisplayedRowsArgs, Table, TableBody, TableBodyProps, TableFooter, TablePagination, TablePaginationProps, TableProps } from '@mui/material'
+import { LabelDisplayedRowsArgs, Table, TableBody, TableBodyProps, TablePagination, TablePaginationProps, TableProps } from '@mui/material'
 import * as locales from '@mui/material/locale'
 import { ThemeProvider, createTheme, useTheme } from '@mui/material/styles'
 import React, { ReactNode, useEffect, useMemo, useState } from 'react'
@@ -85,6 +85,7 @@ export const TableBaseComponent: React.FC<TableBaseComponentProps<any>> = <T,>(p
   // const defaultPageCount = Math.ceil(props.bodyList.length / rowsPerPage)
   const defaultPageCount = Math.ceil(props.bodyList.length / 10)
 
+  // wrapperProps -> tableShadowContainerProps -> tableScrollContainerProps -> tableProps
   return <>
     <div {...props.wrapperProps}
       className={`table-and-pagination-wrapper ${props.wrapperProps?.className}`}

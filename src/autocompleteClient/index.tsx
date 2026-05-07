@@ -1,4 +1,4 @@
-import { Popper, PopperProps, autocompleteClasses, } from '@mui/material';
+import { Popper, PopperProps, autocompleteClasses } from '@mui/material';
 import Autocomplete, { AutocompleteProps } from '@mui/material/Autocomplete';
 import CircularProgress from '@mui/material/CircularProgress';
 import TextField, { TextFieldProps } from '@mui/material/TextField';
@@ -14,10 +14,16 @@ import * as React from 'react';
 //   });
 // }
 
-export interface IAutocompleteClientComponentProps<T extends {}> extends Partial<AutocompleteProps<any, any, any, any, any>> {
+function getNestedProperty<T>(obj: T, path: string): any {
+  return path.split('.').reduce((acc, key) => acc && (acc as any)[key], obj);
+}
+
+export interface IAutocompleteClientComponentProps<T extends {}> extends Partial<AutocompleteProps<T, any, any, any, any>> {
   inputValueKeyName: string,
   onGetData: (filter: string, keyValue: boolean) => T[] | undefined | Promise<T[] | undefined>
   initKeyValue?: any,
+  initOptions?: readonly T[] | undefined,
+  initOption?: T | undefined,
   onChangeItem?: (data?: T | null) => void,
   textFieldProps?: TextFieldProps,
   getOnInit?: boolean,
@@ -30,7 +36,7 @@ const CustomPopper = (props: PopperProps) => {
 };
 
 export const AutocompleteClientComponent = <T extends {},>(props: IAutocompleteClientComponentProps<T>) => {
-  const { initKeyValue, onChangeItem, inputValueKeyName, onGetData, textFieldProps, getOnInit, getAllOnOpen, fitDropDownWidth, ...rest } = props
+  const { inputValueKeyName, initKeyValue, initOptions, initOption, onChangeItem, onGetData, textFieldProps, getOnInit, getAllOnOpen, fitDropDownWidth, ...rest } = props
 
   const [inputValue, setInputValue] = React.useState('');
   const [open, setOpen] = React.useState(false);
@@ -39,7 +45,7 @@ export const AutocompleteClientComponent = <T extends {},>(props: IAutocompleteC
   const { enqueueSnackbar } = useSnackbar()
 
   const getData = async (filter: string, keyValue: boolean) => {
-    if (loading) return
+    // if (loading) return
     setLoading(true)
 
     // await sleep(1e3);
@@ -65,10 +71,6 @@ export const AutocompleteClientComponent = <T extends {},>(props: IAutocompleteC
     }
   };
 
-  function getNestedProperty<T>(obj: T, path: string): any {
-    return path.split('.').reduce((acc, key) => acc && (acc as any)[key], obj);
-  }
-
   React.useEffect(() => {
     if (getOnInit)
       (async () => {
@@ -92,8 +94,14 @@ export const AutocompleteClientComponent = <T extends {},>(props: IAutocompleteC
     setOpen(false);
   };
 
+  React.useEffect(() => {
+    if (initOption) {
+      setInputValue(getNestedProperty(initOption, inputValueKeyName))
+    }
+  }, [initOption])
+
   // new...
-  const typingTimeout = React.useRef<NodeJS.Timeout>();
+  const typingTimeout = React.useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const handleInputChange = (value: string) => {
     setInputValue(value);
@@ -109,8 +117,30 @@ export const AutocompleteClientComponent = <T extends {},>(props: IAutocompleteC
 
   return (
     <>
-      <Autocomplete
-        {...rest}
+      <Autocomplete<T>
+        {...(rest as any)}
+
+        // renderOption example
+        // renderOption={(props, option, state, ownerState) => {
+        //   const { key, ...optionProps } = props;
+        //   return (
+        //     <Box
+        //       key={key}
+        //       sx={{
+        //         borderRadius: '8px',
+        //         margin: '5px',
+        //         [`&.${autocompleteClasses.option}`]: {
+        //           padding: '8px',
+        //         },
+        //       }}
+        //       component="li"
+        //       {...optionProps}
+        //     >
+        //       {ownerState.getOptionLabel(option)}
+        //     </Box>
+        //   );
+        // }}
+
         // PopperComponent={CustomPopper}
         // new...
         filterOptions={rest.filterOptions ?? ((options) => options)}
@@ -136,7 +166,8 @@ export const AutocompleteClientComponent = <T extends {},>(props: IAutocompleteC
           const result = getNestedProperty(option, inputValueKeyName) ?? ''
           return result
         })}
-        options={rest.options ?? options}
+        // options={rest.options ?? options}
+        options={rest.options ?? options ?? initOptions}
         loading={rest.loading ?? loading}
         inputValue={rest.inputValue ?? inputValue ?? ''}
         onChange={rest.onChange ?? ((_: any, newValue: T | null) => {
@@ -162,7 +193,7 @@ export const AutocompleteClientComponent = <T extends {},>(props: IAutocompleteC
             // new...
             // onChange={(e) => setInputValue(e.target.value)}
             onChange={(e) => handleInputChange(e.target.value)}
-            // ...new
+          // ...new
           />
         ))}
         onKeyDown={rest.onKeyDown ?? (async (event) => {

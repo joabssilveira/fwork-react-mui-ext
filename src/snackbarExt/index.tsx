@@ -17,8 +17,9 @@ const useSnackbarExt = () => {
 
   const enqueueSnackbarError = (msg: SnackbarMessage, options?: OptionsObject) => {
     enqueueSnackbar(msg, {
-      ...options,
       variant: 'error',
+      action: (id) => <SnackCancelBtnComponent snackbarId={id} />,
+      ...options,
     });
   };
 
@@ -33,8 +34,9 @@ const useSnackbarExt = () => {
 
   const enqueueSnackbarSuccess = (msg: SnackbarMessage, options?: OptionsObject) => {
     enqueueSnackbar(msg, {
-      ...options,
       variant: 'success',
+      action: (id) => <SnackCancelBtnComponent snackbarId={id} />,
+      ...options,
     });
   };
 
@@ -49,8 +51,9 @@ const useSnackbarExt = () => {
 
   const enqueueSnackbarInfo = (msg: SnackbarMessage, options?: OptionsObject) => {
     enqueueSnackbar(msg, {
-      ...options,
       variant: 'info',
+      action: (id) => <SnackCancelBtnComponent snackbarId={id} />,
+      ...options,
     });
   };
 
@@ -65,8 +68,9 @@ const useSnackbarExt = () => {
 
   const enqueueSnackbarWarning = (msg: SnackbarMessage, options?: OptionsObject) => {
     enqueueSnackbar(msg, {
-      ...options,
       variant: 'warning',
+      action: (id) => <SnackCancelBtnComponent snackbarId={id} />,
+      ...options,
     });
   };
 

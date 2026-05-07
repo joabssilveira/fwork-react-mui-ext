@@ -27,7 +27,7 @@ export const StyledTableRow = styled(TableRow, {
     backgroundColor: odd ? theme.palette.action.hover : 'initial',
   },
   '&:last-child td, &:last-child th': {
-    border: 0,
+    borderBottom: 0,
   },
   '&&:hover': {
     backgroundColor: ColorUtils.incColor(theme.palette.background.default, -20),

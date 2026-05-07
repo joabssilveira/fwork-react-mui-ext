@@ -5,7 +5,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { BreadcrumbData } from 'use-react-router-breadcrumbs';
 
 // ICONS
-import { styled, useTheme } from '@mui/material';
+import { Divider, styled, useTheme } from '@mui/material';
 import { IoMdHome as HomeIcon } from 'react-icons/io';
 import { MdOutlineArrowForwardIos as DividerIcon } from 'react-icons/md';
 
@@ -31,9 +31,11 @@ export interface IBreadcrumbsBaseComponentProps extends React.DetailedHTMLProps<
   homeRouteName: string,
   breadcrumbs: BreadcrumbData<string>[],
   unLink?: string[],
+  ignoreRoutes?: string[],
+  showBottomBorder?: boolean,
 }
 
-export const BreadcrumbsBaseComponent: React.FC<IBreadcrumbsBaseComponentProps> = ({ homeRouteName, breadcrumbs, unLink, ...props }) => {
+export const BreadcrumbsBaseComponent: React.FC<IBreadcrumbsBaseComponentProps> = ({ homeRouteName, breadcrumbs, unLink, ignoreRoutes, showBottomBorder, ...props }) => {
   const theme = useTheme()
   // const unLink = [
   //   '/bla',
@@ -41,26 +43,15 @@ export const BreadcrumbsBaseComponent: React.FC<IBreadcrumbsBaseComponentProps> 
   // ]
 
   const location = useLocation()
-  // const breadcrumbs = useReactRouterBreadcrumbs([
-  //   {
-  //     path: RoutesNames.home,
-  //     breadcrumb: 'Home'
-  //   },
-  //   {
-  //     path: RoutesNames.masters,
-  //     breadcrumb: 'Masters route description',
-  //     children: [{
-  //       path: RoutesNames.child,
-  //     }]
-  //   },
-  // ]);
 
   const checkArrays = (arrayA: any[], arrayB: any[]) => arrayA.some(r => arrayB.indexOf(r) >= 0)
 
   return <>
+    {/* <label style={{ background: 'green', color: 'white' }}>{homeRouteName}</label> */}
     <BreadcrumbWrapperStyled {...props}>
-      {breadcrumbs.map((args, index) => {
+      {breadcrumbs.filter(b =>  !ignoreRoutes?.includes(b.match.pathname)).map((args, index) => {
         return <React.Fragment key={index}>
+          {/* <label style={{ background: 'red', color: 'white' }}>{args.match.pathname}</label> */}
           {/* HOME */}
           {args.match.pathname == homeRouteName ?
             <Link style={breadcrumbAlignItem} to={args.match.pathname}>
@@ -82,5 +73,7 @@ export const BreadcrumbsBaseComponent: React.FC<IBreadcrumbsBaseComponentProps> 
         </React.Fragment>
       })}
     </BreadcrumbWrapperStyled>
+
+    {showBottomBorder == true && <Divider />}
   </>
 }
