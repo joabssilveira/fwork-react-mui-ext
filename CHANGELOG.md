@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.1.0](https://github.com/joabssilveira/fwork-react-mui-ext/compare/v2.0.33...v2.1.0) (2026-08-13)
+
+
+### Features
+
+* autocompleteclientcomponent now uses enqueueSnackbarPersistedError ([070d29d](https://github.com/joabssilveira/fwork-react-mui-ext/commit/070d29ddd6e12bb1b17338d81ddd87fa68ff0881))
+
 ### [2.0.33](https://github.com/joabssilveira/fwork-react-mui-ext/compare/v2.0.32...v2.0.33) (2026-08-13)
 
 ### [2.0.32](https://github.com/joabssilveira/fwork-react-mui-ext/compare/v2.0.31...v2.0.32) (2026-05-07)
