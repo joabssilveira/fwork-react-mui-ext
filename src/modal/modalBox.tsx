@@ -15,5 +15,6 @@ export const ModalBoxStyledComponent = styled(Box)(({ theme }) => {
     display: 'flex',
     flexDirection: 'column',
     boxSizing: 'border-box',
+    boxShadow: theme.palette.mode == 'dark' ? '0px 0px 35px 0px rgba(0,0,0,0.7)' : '0px 0px 35px 0px rgba(0,0,0,0.2)'
   }
 })

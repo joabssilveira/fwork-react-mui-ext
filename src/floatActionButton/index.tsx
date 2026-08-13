@@ -66,7 +66,7 @@ export const FloatActionButtonComponent: React.FC<IFloatActionButtonComponentPro
       ...addProps,
       icon: addProps.icon ?? <AddIcon />,
       toolTip: addProps.toolTip ?? {
-        title: 'Adicionar Novo'
+        title: 'Novo'
       }
     })
     if (editProps) result.push({
