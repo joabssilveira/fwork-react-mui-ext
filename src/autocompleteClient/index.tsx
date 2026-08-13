@@ -3,7 +3,6 @@ import Autocomplete, { AutocompleteProps } from '@mui/material/Autocomplete';
 import CircularProgress from '@mui/material/CircularProgress';
 import TextField, { TextFieldProps } from '@mui/material/TextField';
 import { ApiClientUtils, NestedKeys } from 'fwork-jsts-common';
-import { useSnackbar } from 'notistack';
 import * as React from 'react';
 import useSnackbarExt from '../snackbarExt';
 
@@ -46,7 +45,6 @@ export const AutocompleteClientComponent = <T extends {}, MaxDepth extends numbe
   const [open, setOpen] = React.useState(false);
   const [options, setOptions] = React.useState<readonly T[]>([]);
   const [loading, setLoading] = React.useState(false);
-  const { enqueueSnackbar } = useSnackbar()
   const { enqueueSnackbarPersistedError } = useSnackbarExt()
 
   // EXPORTED METHOD...  
