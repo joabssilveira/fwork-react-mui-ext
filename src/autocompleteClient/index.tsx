@@ -5,6 +5,7 @@ import TextField, { TextFieldProps } from '@mui/material/TextField';
 import { ApiClientUtils, NestedKeys } from 'fwork-jsts-common';
 import { useSnackbar } from 'notistack';
 import * as React from 'react';
+import useSnackbarExt from '../snackbarExt';
 
 // function sleep(duration: number): Promise<void> {
 //   return new Promise<void>((resolve) => {
@@ -46,6 +47,7 @@ export const AutocompleteClientComponent = <T extends {}, MaxDepth extends numbe
   const [options, setOptions] = React.useState<readonly T[]>([]);
   const [loading, setLoading] = React.useState(false);
   const { enqueueSnackbar } = useSnackbar()
+  const { enqueueSnackbarPersistedError } = useSnackbarExt()
 
   // EXPORTED METHOD...  
   React.useEffect(() => {
@@ -72,7 +74,7 @@ export const AutocompleteClientComponent = <T extends {}, MaxDepth extends numbe
     try {
       return await onGetData(filter, keyValue)
     } catch (error) {
-      enqueueSnackbar(ApiClientUtils.getErrorMessage(error), { variant: 'error' })
+      enqueueSnackbarPersistedError(ApiClientUtils.getErrorMessage(error))
     } finally {
       setLoading(false)
     }
