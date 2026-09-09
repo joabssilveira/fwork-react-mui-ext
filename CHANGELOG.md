@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.2.0](https://github.com/joabssilveira/fwork-react-mui-ext/compare/v2.1.0...v2.2.0) (2026-09-09)
+
+
+### Features
+
+* accordion, stepper, tree, loading ([f3658d6](https://github.com/joabssilveira/fwork-react-mui-ext/commit/f3658d6449fab12e0411769582d4b018cb294a74))
+
+
+### Bug Fixes
+
+* unused enqueueSnackbar reference on autocompleteclientcomponent ([3100fca](https://github.com/joabssilveira/fwork-react-mui-ext/commit/3100fcacf33283f13b6920e427e41e732e4d2d43))
+
 ## [2.1.0](https://github.com/joabssilveira/fwork-react-mui-ext/compare/v2.0.33...v2.1.0) (2026-08-13)
 
 
