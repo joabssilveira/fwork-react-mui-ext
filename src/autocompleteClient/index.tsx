@@ -21,6 +21,9 @@ function getNestedProperty<T>(obj: T, path: string): any {
 export interface IAutocompleteClientComponentProps<T extends {}, MaxDepth extends number = 3,> extends Partial<AutocompleteProps<T, any, any, any, any>> {
   inputValueKeyName: NestedKeys<T, MaxDepth>,
   onGetData: (filter: string, keyValue: boolean) => T[] | undefined | Promise<T[] | undefined>
+  /**
+   * faz uma consulta para pegar a opcao necessaria pela chave, so usar caso nao tenha uma opcao ja disponivel pra passar em initOption
+   */
   initKeyValue?: any,
   initOptions?: readonly T[] | undefined,
   initOption?: T | undefined,
@@ -106,7 +109,6 @@ export const AutocompleteClientComponent = <T extends {}, MaxDepth extends numbe
         setOptions(dataResponse ?? [])
         if (dataResponse?.length) {
           setInputValue(getNestedProperty(dataResponse[0], inputValueKeyName))
-          // console.log(`SETINPUTVALUE->useEffect: [initKeyValue, inputValueKeyName]`)
         }
       })();
   }, [initKeyValue, inputValueKeyName])
@@ -217,12 +219,13 @@ export const AutocompleteClientComponent = <T extends {}, MaxDepth extends numbe
             {...params}
             {...textFieldProps}
             slotProps={{
+              ...params.slotProps,
               input: {
-                ...params.InputProps, // Preserva as configurações existentes
+                ...params.slotProps.input, // Preserva as configurações existentes
                 endAdornment: (
                   <>
                     {loading ? <CircularProgress color="inherit" size={20} /> : null}
-                    {params.InputProps?.endAdornment}
+                    {params.slotProps.input?.endAdornment}
                   </>
                 ),
               },

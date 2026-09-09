@@ -1,4 +1,4 @@
-import { autocompleteClasses, Box, MenuItem, Modal, useTheme } from "@mui/material";
+import { autocompleteClasses, Box, BoxProps, Modal, ModalProps, useTheme } from "@mui/material";
 import React, { MutableRefObject, ReactNode, useEffect, useState } from "react";
 import { AutocompleteClientComponent, IAutocompleteClientComponentProps } from ".";
 import { ModalBoxStyledComponent } from "../modal/modalBox";
@@ -17,7 +17,11 @@ export interface IAutocompleteClientExtOption<T extends {}> {
 export type AutocompleteClientComponentExtProps<T extends {}, MaxDepth extends number = 3,> = {
   addOption?: {
     el?: ReactNode,
-    closeRef?: MutableRefObject<(() => void) | null | undefined>
+    closeRef?: MutableRefObject<(() => void) | null | undefined>,
+    dialogProps?: {
+      modalProps?: Omit<ModalProps, 'open' | 'onClose'>,
+      wrapperProps?: BoxProps,
+    }
   }
 } & IAutocompleteClientComponentProps<IAutocompleteClientExtOption<T>, MaxDepth>
 
@@ -40,14 +44,15 @@ export const AutocompleteClientComponentExt = <T extends {}, MaxDepth extends nu
 
   return <>
     <Modal
+      {...addOption?.dialogProps?.modalProps}
       open={openPreviewModal}
       onClose={() => {
         setOpenPreviewModal(false)
         setAnchorEl(null)
       }}
-      style={{ padding: 20 }}
+      style={{ padding: 20, ...addOption?.dialogProps?.modalProps?.style, }}
     >
-      <ModalBoxStyledComponent style={{ maxWidth: '80%', background: theme.palette.background.default }}>
+      <ModalBoxStyledComponent {...addOption?.dialogProps?.wrapperProps} style={{ maxWidth: '80%', background: theme.palette.background.default, ...addOption?.dialogProps?.wrapperProps?.style }}>
         {addOption?.el}
       </ModalBoxStyledComponent>
     </Modal>
@@ -72,8 +77,8 @@ export const AutocompleteClientComponentExt = <T extends {}, MaxDepth extends nu
 
       getOptionKey={getOptionKey ?? ((option: string | IAutocompleteClientExtOption<T>) => (option as IAutocompleteClientExtOption<T>).id)}
 
-      isOptionEqualToValue={isOptionEqualToValue ?? ((option: IAutocompleteClientExtOption<T>, value: IAutocompleteClientExtOption<T>) => {
-        return option.id == value.id
+      isOptionEqualToValue={isOptionEqualToValue ?? ((option: IAutocompleteClientExtOption<T>, value: string | IAutocompleteClientExtOption<T>) => {
+        return option.id == (value as IAutocompleteClientExtOption<T>).id
       })}
 
       renderOption={renderOption ?? ((props, option, state, ownerState) => {
@@ -82,17 +87,25 @@ export const AutocompleteClientComponentExt = <T extends {}, MaxDepth extends nu
 
         if (option.type == AutocompleteClientExtOptionType.newItem) {
           return (
-            <MenuItem
+            <Box
               key={key}
+              sx={{
+                borderBottom: `1px solid transparent`,
+                backgroundColor: selected ? 'primary.main' : 'transparent',
+                '&:hover': {
+                  borderBottom: `1px solid ${theme.palette.divider}`,
+                  backgroundColor: selected ? 'primary.dark' : 'action.hover',
+                },
+                [`&.${autocompleteClasses.option}`]: {
+                  padding: '8px',
+                },
+              }}
+              component="li"
+              {...optionProps}
+
               onClick={() => {
                 setAnchorEl(null)
                 setOpenPreviewModal(true)
-              }}
-              sx={{
-                borderBottom: `1px solid transparent`,
-                '&:hover': {
-                  borderBottom: `1px solid ${theme.palette.divider}`,
-                },
               }}
             >
               <span
@@ -106,7 +119,7 @@ export const AutocompleteClientComponentExt = <T extends {}, MaxDepth extends nu
               >
                 <span>{'<Novo...>'}</span>
               </span>
-            </MenuItem>
+            </Box>
           );
         }
 

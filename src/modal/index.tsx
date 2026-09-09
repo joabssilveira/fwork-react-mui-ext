@@ -25,7 +25,12 @@ export const ModalComponent: React.FC<IModalComponentProps> = ({
 
         {modalContent}
 
-        <Box display='flex' justifyContent='flex-end' gap={2} mt={2}>
+        <Box sx={{
+          display: 'flex',
+          justifyContent: 'flex-end',
+          gap: '20px',
+          mt: '20px'
+        }}>
           <Button onClick={() => setOpenModal(false)} variant='outlined'>
             {onConfirm ? 'Cancelar' : 'Fechar'}
           </Button>

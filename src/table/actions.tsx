@@ -1,6 +1,6 @@
 import React from 'react';
 import { IconButton, Box } from '@mui/material';
-import { TablePaginationActionsProps } from '@mui/material/TablePagination/TablePaginationActions';
+import { TablePaginationActionsProps } from '@mui/material/TablePaginationActions'
 import FirstPageIcon from '@mui/icons-material/FirstPage';
 import LastPageIcon from '@mui/icons-material/LastPage';
 import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';

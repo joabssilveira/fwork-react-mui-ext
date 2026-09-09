@@ -27,8 +27,8 @@ export const AutocompleteClientComponentExample = () => {
       getOnInit
       getAllOnOpen
       fitDropDownWidth
-      getOptionLabel={(post: IPost) => {
-        return `${post.title} (${post.id})`
+      getOptionLabel={(post: IPost | string) => {
+        return typeof post == 'string' ? post : `${post.title} (${post.id})`
       }}
       style={{ width: 200 }}
 

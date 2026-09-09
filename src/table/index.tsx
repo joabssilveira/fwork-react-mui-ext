@@ -25,7 +25,7 @@ export const TableComponent: React.FC<TableComponentProps<any>> = <T,>(props: Ta
               cursor: props.rowProps?.onClickGetItem ? 'pointer' : 'default',
               ...props.rowProps?.style,
             }}
-            onClick={(event) => {
+            onClick={(event: any) => {
               if (props.rowProps?.onClick)
                 props.rowProps.onClick(event)
 

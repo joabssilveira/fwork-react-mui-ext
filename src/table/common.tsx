@@ -2,7 +2,7 @@ import { ListItemText, TableRowProps } from '@mui/material'
 import TableCell from '@mui/material/TableCell'
 import TableRow from '@mui/material/TableRow'
 import * as locales from '@mui/material/locale'
-import styled from '@mui/material/styles/styled'
+import { styled } from '@mui/material/styles'
 import { ColorUtils } from 'fwork-jsts-common'
 
 export type SupportedLocales = keyof typeof locales
