@@ -1,4 +1,4 @@
-import { Button, Grid2 as Grid } from "@mui/material";
+import { Button, Grid } from "@mui/material";
 import { DateTimeValidationError, PickerChangeHandlerContext } from "@mui/x-date-pickers";
 import { periodOptions, PeriodOptionsNames } from "fwork-jsts-common";
 import { Moment } from "moment";
@@ -43,8 +43,8 @@ export const DateTimeRangeComponent: React.FC<IDateTimeRangeDialogComponentProps
               }}
               label="Data Inicial"
               value={di}
-              onChange={(value: Moment, _context: PickerChangeHandlerContext<DateTimeValidationError>) => {
-                setDi(value.startOf('day'))
+              onChange={(value: Moment | null, _context: PickerChangeHandlerContext<DateTimeValidationError>) => {
+                setDi(value?.startOf('day'))
                 setLabel('')
                 setPeriodValueKey(undefined)
               }}
@@ -57,8 +57,8 @@ export const DateTimeRangeComponent: React.FC<IDateTimeRangeDialogComponentProps
               }}
               label="Data Final"
               value={df}
-              onChange={(value: Moment, _context: PickerChangeHandlerContext<DateTimeValidationError>) => {
-                setDf(value.endOf('day'))
+              onChange={(value: Moment | null, _context: PickerChangeHandlerContext<DateTimeValidationError>) => {
+                setDf(value?.endOf('day'))
                 setLabel('')
                 setPeriodValueKey(undefined)
               }}
