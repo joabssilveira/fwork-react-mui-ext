@@ -69,7 +69,7 @@
     "release": "standard-version",
     "pub": "npm run build && npm run release && git push --follow-tags origin main && npm publish"
   },
-  "version": "2.2.0",
+  "version": "2.2.1",
   "exports": {
     ".": {
       "types": "./dist/types/index.d.ts",
