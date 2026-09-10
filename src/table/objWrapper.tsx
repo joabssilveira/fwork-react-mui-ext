@@ -2,7 +2,7 @@ import { IconButton, TableHead } from "@mui/material";
 import { styled } from "@mui/system";
 import React, { useState } from "react";
 import { FaMinus, FaPlus } from "react-icons/fa";
-import { TableBaseComponent } from "./base";
+import { TableComponent } from "./";
 import { StyledTableCell, StyledTableRow } from "./common";
 
 type AnyObject = { [key: string]: any };
@@ -54,7 +54,7 @@ export const TableObjWrapperComponent = (props: ObjInTableComponentProps) => {
   }
 
   return obj ? <>
-    <TableBaseComponent
+    <TableComponent
       wrapperProps={{
         style: {
           borderRadius: 5,

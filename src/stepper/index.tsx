@@ -42,7 +42,7 @@ export const StepComponent = ({
     setActiveStepIdx(prevActiveStep => prevActiveStep - 1);
   };
 
-  return <div style={{ display: 'flex', flexDirection: 'column', flex: 1, }}>
+  return <div style={{ display: 'flex', flexDirection: 'column', flex: 1, marginTop: orientation == 'horizontal' ? 20 : undefined }}>
     {step.element}
 
     <Box

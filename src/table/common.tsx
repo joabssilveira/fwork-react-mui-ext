@@ -39,3 +39,7 @@ export type TableComponentSetCurrPageProps = ((args: {
   page: number
 }) => void) | null
 // ...EXPORTED METHOD
+
+export type Checkable<T> = T & {
+  _checked?: boolean
+}

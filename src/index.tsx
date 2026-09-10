@@ -17,9 +17,8 @@ import { ModalBoxStyledComponent } from './modal/modalBox'
 import useSnackbarExt from './snackbarExt'
 import { StepData, StepperComponent, StepperComponentProps, } from './stepper'
 import './styles/index.css'
-import { TableComponent, TableComponentProps, TableComponentRowProps } from './table'
+import { TableComponent, TableComponentProps, } from './table'
 import { TablePaginationActions, TablePaginationActionsPropsExt } from './table/actions'
-import { TableBaseComponent, TableBaseComponentProps } from './table/base'
 import { StyledListItemText, StyledTableCell, StyledTableRow, StyledTableRowProps, SupportedLocales, TableComponentSetCurrPageProps } from './table/common'
 import { ObjInTableComponentProps, ObjInTableShowHideWrapperComponent, StyledTableTitleCell, TableObjWrapperComponent } from './table/objWrapper'
 import { NodeModelExt, TreeComponent, TreeItemChipComponent, } from './tree'
@@ -34,8 +33,8 @@ export {
   LoadingCircularContext,
   LoadingCircularProvider, LoadingCircularState, ModalBoxStyledComponent, ModalComponent, NodeModelExt, ObjInTableComponentProps,
   ObjInTableShowHideWrapperComponent, StepData, StepperComponent, StepperComponentProps,
-  StyledListItemText, StyledTableCell, StyledTableRow, StyledTableRowProps, StyledTableTitleCell, SupportedLocales, TableBaseComponent,
-  TableBaseComponentProps, TableComponent, TableComponentProps, TableComponentRowProps, TableComponentSetCurrPageProps, TableObjWrapperComponent,
+  StyledListItemText, StyledTableCell, StyledTableRow, StyledTableRowProps, StyledTableTitleCell, SupportedLocales,
+  TableComponent, TableComponentProps, TableComponentSetCurrPageProps, TableObjWrapperComponent,
   TablePaginationActions, TablePaginationActionsPropsExt, TreeComponent, TreeItemChipComponent, useLoadingBar, useLoadingCircular, useSnackbarExt
 }
 
