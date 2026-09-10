@@ -1,5 +1,5 @@
 import { TextField, TextFieldProps } from "@mui/material"
-import { format, Replacement, unformat, useMask } from "@react-input/mask"
+import { format, unformat, Replacement, useMask } from "@react-input/mask"
 import React from "react"
 
 export type InputMaskProps = {

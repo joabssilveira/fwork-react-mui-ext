@@ -63,7 +63,7 @@
   },
   "scripts": {
     "dev:example": "webpack serve --config appExample/webpack.config.js",
-    "postbuild": "node postbuild.js",
+    "postbuild": "node postbuild.cjs",
     "build": "tsc --project tsconfig.cjs.json && tsc --project tsconfig.esm.json",
     "prepare": "husky",
     "release": "standard-version",
