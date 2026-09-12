@@ -1,11 +1,12 @@
 import { Box, Button, Orientation, Step, StepContent, StepLabel, Stepper, Typography } from '@mui/material'
 import { StrictOmit } from 'fwork-jsts-common'
-import React from 'react'
+import React, { CSSProperties } from 'react'
 
 export type StepData = {
   id: string,
   label: string,
-  element: React.ReactNode
+  element: React.ReactNode,
+  stepWrapperStyle?: CSSProperties,
 }
 
 export type StepComponentProps = {
@@ -18,15 +19,16 @@ export type StepComponentProps = {
   onFinishConfirm?: (step: StepData) => void,
 }
 
-export const StepComponent = ({
-  step,
-  stepIndex,
-  isLast,
-  orientation,
-  setActiveStepIdx,
-  onDisableNext,
-  onFinishConfirm,
-}: StepComponentProps) => {
+export const StepComponent = (props: StepComponentProps) => {
+  const { step,
+    stepIndex,
+    isLast,
+    orientation,
+    setActiveStepIdx,
+    onDisableNext,
+    onFinishConfirm,
+  } = props
+
   const nextStep = (args: {
     last: boolean,
     step: StepData,
@@ -42,7 +44,7 @@ export const StepComponent = ({
     setActiveStepIdx(prevActiveStep => prevActiveStep - 1);
   };
 
-  return <div style={{ display: 'flex', flexDirection: 'column', flex: 1, marginTop: orientation == 'horizontal' ? 20 : undefined }}>
+  return <div id='step-component' style={{ display: 'flex', flexDirection: 'column', flex: 1, marginTop: orientation == 'horizontal' ? 20 : undefined, ...step.stepWrapperStyle }}>
     {step.element}
 
     <Box
