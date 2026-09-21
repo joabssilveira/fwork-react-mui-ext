@@ -17,7 +17,7 @@ export interface TableComponentProps<T> {
   tableScrollContainerProps?: React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>,
   tableProps?: TableProps,
   bodyProps?: TableBodyProps,
-  paginationProps?: TablePaginationProps,
+  paginationProps?: StrictOmit<TablePaginationProps, 'count' | 'page' | 'rowsPerPage'>,
 
   bodyRowBuilder: (item: T, idx: number) => React.ReactNode,
   onPageChange?: (page: number) => void,
