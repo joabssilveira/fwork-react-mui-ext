@@ -1,7 +1,9 @@
 import { IconButton } from '@mui/material';
-import { OptionsObject, SnackbarKey, SnackbarMessage, useSnackbar } from 'notistack';
+import { closeSnackbar, OptionsObject, SnackbarKey, SnackbarMessage, useSnackbar } from 'notistack';
 import React from 'react';
 import { MdCancel } from 'react-icons/md';
+
+export type EnqueueSnackbarExt = (msg: SnackbarMessage, options?: OptionsObject & { closePrior?: SnackbarKey[] }) => SnackbarKey
 
 const SnackCancelBtnComponent = (props: {
   snackbarId: SnackbarKey
@@ -15,71 +17,119 @@ const SnackCancelBtnComponent = (props: {
 const useSnackbarExt = () => {
   const { enqueueSnackbar } = useSnackbar();
 
-  const enqueueSnackbarError = (msg: SnackbarMessage, options?: OptionsObject) => {
-    enqueueSnackbar(msg, {
+  const enqueueSnackbarError: EnqueueSnackbarExt = (msg: SnackbarMessage, options?: OptionsObject & { closePrior?: SnackbarKey[] }) => {
+    const {closePrior, ...rest} = options ?? {}
+
+    if (options?.closePrior?.length)
+      for (const prior of options.closePrior)
+        closeSnackbar(prior)
+
+    return enqueueSnackbar(msg, {
       variant: 'error',
       action: (id) => <SnackCancelBtnComponent snackbarId={id} />,
-      ...options,
+      ...rest,
     });
   };
 
-  const enqueueSnackbarPersistedError = (msg: SnackbarMessage, options?: OptionsObject) => {
-    enqueueSnackbar(msg, {
+  const enqueueSnackbarPersistedError: EnqueueSnackbarExt = (msg: SnackbarMessage, options?: OptionsObject & { closePrior?: SnackbarKey[] }) => {
+    const {closePrior, ...rest} = options ?? {}
+
+    if (options?.closePrior?.length)
+      for (const prior of options.closePrior)
+        closeSnackbar(prior)
+
+    return enqueueSnackbar(msg, {
       variant: 'error',
       persist: true,
       action: (id) => <SnackCancelBtnComponent snackbarId={id} />,
-      ...options,
+      ...rest,
     });
   };
 
-  const enqueueSnackbarSuccess = (msg: SnackbarMessage, options?: OptionsObject) => {
-    enqueueSnackbar(msg, {
+  const enqueueSnackbarSuccess: EnqueueSnackbarExt = (msg: SnackbarMessage, options?: OptionsObject & { closePrior?: SnackbarKey[] }) => {
+    const {closePrior, ...rest} = options ?? {}
+
+    if (options?.closePrior?.length)
+      for (const prior of options.closePrior)
+        closeSnackbar(prior)
+
+    return enqueueSnackbar(msg, {
       variant: 'success',
       action: (id) => <SnackCancelBtnComponent snackbarId={id} />,
-      ...options,
+      ...rest,
     });
   };
 
-  const enqueueSnackbarPersistedSuccess = (msg: SnackbarMessage, options?: OptionsObject) => {
-    enqueueSnackbar(msg, {
+  const enqueueSnackbarPersistedSuccess: EnqueueSnackbarExt = (msg: SnackbarMessage, options?: OptionsObject & { closePrior?: SnackbarKey[] }) => {
+    const {closePrior, ...rest} = options ?? {}
+
+    if (options?.closePrior?.length)
+      for (const prior of options.closePrior)
+        closeSnackbar(prior)
+
+    return enqueueSnackbar(msg, {
       variant: 'success',
       persist: true,
       action: (id) => <SnackCancelBtnComponent snackbarId={id} />,
-      ...options,
+      ...rest,
     });
   };
 
-  const enqueueSnackbarInfo = (msg: SnackbarMessage, options?: OptionsObject) => {
-    enqueueSnackbar(msg, {
+  const enqueueSnackbarInfo: EnqueueSnackbarExt = (msg: SnackbarMessage, options?: OptionsObject & { closePrior?: SnackbarKey[] }) => {
+    const {closePrior, ...rest} = options ?? {}
+
+    if (options?.closePrior?.length)
+      for (const prior of options.closePrior)
+        closeSnackbar(prior)
+
+    return enqueueSnackbar(msg, {
       variant: 'info',
       action: (id) => <SnackCancelBtnComponent snackbarId={id} />,
-      ...options,
+      ...rest,
     });
   };
 
-  const enqueueSnackbarPersistedInfo = (msg: SnackbarMessage, options?: OptionsObject) => {
-    enqueueSnackbar(msg, {
+  const enqueueSnackbarPersistedInfo: EnqueueSnackbarExt = (msg: SnackbarMessage, options?: OptionsObject & { closePrior?: SnackbarKey[] }) => {
+    const {closePrior, ...rest} = options ?? {}
+
+    if (options?.closePrior?.length)
+      for (const prior of options.closePrior)
+        closeSnackbar(prior)
+
+    return enqueueSnackbar(msg, {
       variant: 'info',
       persist: true,
       action: (id) => <SnackCancelBtnComponent snackbarId={id} />,
-      ...options,
+      ...rest,
     });
   };
 
-  const enqueueSnackbarWarning = (msg: SnackbarMessage, options?: OptionsObject) => {
-    enqueueSnackbar(msg, {
+  const enqueueSnackbarWarning: EnqueueSnackbarExt = (msg: SnackbarMessage, options?: OptionsObject & { closePrior?: SnackbarKey[] }) => {
+    const {closePrior, ...rest} = options ?? {}
+
+    if (options?.closePrior?.length)
+      for (const prior of options.closePrior)
+        closeSnackbar(prior)
+
+    return enqueueSnackbar(msg, {
       variant: 'warning',
       action: (id) => <SnackCancelBtnComponent snackbarId={id} />,
-      ...options,
+      ...rest,
     });
   };
 
-  const enqueueSnackbarPersistedWarning = (msg: SnackbarMessage, options?: OptionsObject) => {
-    enqueueSnackbar(msg, {
+  const enqueueSnackbarPersistedWarning: EnqueueSnackbarExt = (msg: SnackbarMessage, options?: OptionsObject & { closePrior?: SnackbarKey[] }) => {
+    const {closePrior, ...rest} = options ?? {}
+
+    if (options?.closePrior?.length)
+      for (const prior of options.closePrior)
+        closeSnackbar(prior)
+
+    return enqueueSnackbar(msg, {
       variant: 'warning',
       persist: true,
       action: (id) => <SnackCancelBtnComponent snackbarId={id} />,
-      ...options,
+      ...rest,
     });
   };
 
