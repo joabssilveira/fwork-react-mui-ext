@@ -2,6 +2,19 @@ import { TextField, TextFieldProps } from "@mui/material"
 import { format, unformat, Replacement, useMask } from "@react-input/mask"
 import React from "react"
 
+export const resolveReplacement = (options: {
+  replacement?: Record<string, string>
+}) => {
+  const { replacement } = options
+
+  const parsed: any = {}
+  if (replacement)
+    for (let key of Object.keys(replacement))
+      parsed[key] = new RegExp(replacement[key])
+
+  return parsed
+}
+
 export type InputMaskProps = {
   value?: string
   mask?: string

@@ -5,7 +5,7 @@ import { BreadcrumbsBaseComponent, IBreadcrumbsBaseComponentProps } from './brea
 import { DatePickerExtComponent, DatePickerExtComponentProps, DateTimePickerExtComponent, DateTimePickerExtComponentProps } from './datePicker'
 import { DateTimeRangeComponent, IDateTimeRangeDialogComponentProps } from './dateTimeRange'
 import { FloatActionButtonComponent, IFloatActionButtonComponentProps } from './floatActionButton'
-import { InputMask, InputMaskProps, } from './inputs/mask'
+import { InputMask, InputMaskProps, resolveReplacement, } from './inputs/mask'
 import { LoadingBarComponent, } from './loadingBar'
 import { LoadingBarContext, LoadingBarState, useLoadingBar, } from './loadingBar/context'
 import { LoadingBarProvider, } from './loadingBar/provider'
@@ -32,7 +32,7 @@ export {
   IModalComponentProps, InputMask, InputMaskProps, LoadingBarComponent, LoadingBarContext, LoadingBarProvider, LoadingBarState, LoadingCircularComponent,
   LoadingCircularContext,
   LoadingCircularProvider, LoadingCircularState, ModalBoxStyledComponent, ModalComponent, NodeModelExt, ObjInTableComponentProps,
-  ObjInTableShowHideWrapperComponent, StepData, StepperComponent, StepperComponentProps,
+  ObjInTableShowHideWrapperComponent, resolveReplacement, StepData, StepperComponent, StepperComponentProps,
   StyledListItemText, StyledTableCell, StyledTableRow, StyledTableRowProps, StyledTableTitleCell, SupportedLocales,
   TableComponent, TableComponentProps, TableComponentSetCurrPageProps, TableObjWrapperComponent,
   TablePaginationActions, TablePaginationActionsPropsExt, TreeComponent, TreeItemChipComponent, useLoadingBar, useLoadingCircular, useSnackbarExt

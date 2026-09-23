@@ -4,7 +4,7 @@ import { ThemeProvider, createTheme, useTheme } from '@mui/material/styles'
 import { CommonUtils, StrictOmit } from 'fwork-jsts-common'
 import React, { ReactNode, useEffect, useMemo, useState } from 'react'
 import { TablePaginationActions } from './actions'
-import { Checkable, StyledTableCell, StyledTableRow, StyledTableRowProps, SupportedLocales, TableComponentSetCurrPageProps } from './common'
+import { StyledTableCell, StyledTableRow, StyledTableRowProps, SupportedLocales, TableComponentSetCurrPageProps } from './common'
 
 export interface TableComponentProps<T> {
   downloadCsv?: boolean,
@@ -33,6 +33,8 @@ export interface TableComponentProps<T> {
   rowProps?: {
     onClick?: (event: React.MouseEvent<HTMLTableRowElement, MouseEvent>, item: T) => void
     onChangeChecked?: (e: React.ChangeEvent<HTMLInputElement, Element>, item: T, checked: boolean) => void
+    onDisableChecked?: (item: T) => boolean
+    onGetItemChecked?: (item: T) => boolean | undefined
   } & StrictOmit<StyledTableRowProps, 'onClick'>
 }
 
@@ -140,7 +142,9 @@ export const TableComponent: React.FC<TableComponentProps<any>> = <T,>(props: Ta
                       ? <>
                         <StyledTableCell style={{ padding: '0 0 0 8px', width: 38, textAlign: 'left', verticalAlign: 'center' }}>
                           <Checkbox
-                            checked={(item as Checkable<T>)._checked}
+                            disabled={props.rowProps.onDisableChecked?.(item)}
+                            // checked={(item as Checkable<T>)._checked}
+                            checked={props.rowProps.onGetItemChecked?.(item)}
                             onChange={(e, checked) => {
                               props.rowProps?.onChangeChecked?.(e, item, checked)
                             }}

@@ -51,18 +51,15 @@ export const StepComponent = (props: StepComponentProps) => {
 
       flex: orientation == 'horizontal' ? 1 : undefined,
       marginTop: orientation == 'horizontal' ? 20 : undefined,
-      minHeight: 0,
       ...step.stepWrapperStyle
     }}>
 
     {/* CONTENT */}
     {orientation == 'horizontal' ?
-      <div id='horizontal-wrapper' 
-        style={{
+      <div id='horizontal-wrapper'
+      style={{
           flex: 1,
-          display: 'flex', // ANALISAR
-          flexDirection: 'column', // ANALISAR
-          minHeight: 0,
+          overflow: 'hidden',
         }}
       >
         {step.element}
