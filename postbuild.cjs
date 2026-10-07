@@ -1,80 +1,58 @@
+// https://claude.ai/share/4f9669ef-0903-488a-9cbf-cb6637748aad
+
 const fs = require('fs');
 const path = require('path');
 
-// Função para copiar uma pasta recursivamente
-function copyFolderRecursive(source, destination) {
-  // Verifica se a pasta de destino existe, se não, cria
-  if (!fs.existsSync(destination)) {
-    fs.mkdirSync(destination, { recursive: true });
-  }
+/**
+ * Copia recursivamente de `source` para `destination`, mantendo a estrutura
+ * de pastas, mas somente os arquivos cujas extensões estejam em `extensions`.
+ * Pastas de destino só são criadas se houver algum arquivo para copiar nelas.
+ *
+ * @param {string} source - pasta de origem
+ * @param {string} destination - pasta de destino
+ * @param {string[]} extensions - ex.: ['.scss', '.css']
+ * @returns {number} quantidade de arquivos copiados
+ */
+function copyFolderRecursive(source, destination, extensions) {
+  const allowed = extensions.map((ext) => ext.toLowerCase());
+  let copied = 0;
 
-  // Lê os arquivos/pastas da origem
-  const files = fs.readdirSync(source);
+  for (const entry of fs.readdirSync(source, { withFileTypes: true })) {
+    const sourcePath = path.join(source, entry.name);
+    const destinationPath = path.join(destination, entry.name);
 
-  for (const file of files) {
-    const sourcePath = path.join(source, file);
-    const destinationPath = path.join(destination, file);
-
-    // Verifica se é um diretório ou arquivo
-    if (fs.lstatSync(sourcePath).isDirectory()) {
-      // Se for uma pasta, copia recursivamente
-      copyFolderRecursive(sourcePath, destinationPath);
-    } else {
-      // Se for um arquivo, copia diretamente
+    if (entry.isDirectory()) {
+      copied += copyFolderRecursive(sourcePath, destinationPath, extensions);
+    } else if (allowed.includes(path.extname(entry.name).toLowerCase())) {
+      fs.mkdirSync(destination, { recursive: true });
       fs.copyFileSync(sourcePath, destinationPath);
       console.log(`Arquivo copiado: ${destinationPath}`);
+      copied++;
     }
   }
+
+  return copied;
 }
 
-const fontsSource = path.resolve(__dirname, './src/fonts');
+// ---------------------------------------------------------------------------
 
-const fontsDestinationCjs = path.resolve(__dirname, './dist/cjs/fonts');
-if (fs.existsSync(fontsSource)) {
-  console.log('Copiando pasta de fontes...');
-  copyFolderRecursive(fontsSource, fontsDestinationCjs);
-} else {
-  console.error('Pasta de fontes não encontrada:', fontsSource);
+const srcDir = path.resolve(__dirname, './src');
+const extensions = ['.scss', '.css', '.ttf'];
+const targets = ['./dist/cjs', './dist/esm'];
+
+if (!fs.existsSync(srcDir)) {
+  console.error('Pasta src não encontrada:', srcDir);
   process.exit(1);
 }
 
-const fontsDestinationEsm = path.resolve(__dirname, './dist/esm/fonts');
-if (fs.existsSync(fontsSource)) {
-  console.log('Copiando pasta de fontes...');
-  copyFolderRecursive(fontsSource, fontsDestinationEsm);
-} else {
-  console.error('Pasta de fontes não encontrada:', fontsSource);
-  process.exit(1);
-}
+for (const target of targets) {
+  const destDir = path.resolve(__dirname, target);
 
-const sourceFile = path.resolve(__dirname, './src/styles/index.css');
-
-// cjs
-const destinationDirCjs = path.resolve(__dirname, './dist/cjs/styles');
-const destinationFileCjs = path.join(destinationDirCjs, 'index.css');
-if (!fs.existsSync(destinationDirCjs)) {
-  fs.mkdirSync(destinationDirCjs, { recursive: true });
-}
-
-fs.copyFile(sourceFile, destinationFileCjs, (err) => {
-  if (err) {
-    console.error('Erro ao copiar o arquivo:', err);
-    process.exit(1); // Encerra o script com erro
+  if (!fs.existsSync(destDir)) {
+    console.error(`Pasta ${target} não encontrada. Rode o build do tsc antes.`);
+    process.exit(1);
   }
-  console.log(`Arquivo copiado com sucesso para: ${destinationFileCjs}`);
-});
 
-// esm
-const destinationDirEsm = path.resolve(__dirname, './dist/esm/styles');
-const destinationFileEsm = path.join(destinationDirEsm, 'index.css');
-if (!fs.existsSync(destinationDirEsm)) {
-  fs.mkdirSync(destinationDirEsm, { recursive: true });
+  const total = copyFolderRecursive(srcDir, destDir, extensions);
+  console.log(`${total} arquivo(s) [${extensions.join(', ')}] copiado(s) para ${target}`);
 }
-
-fs.copyFile(sourceFile, destinationFileEsm, (err) => {
-  if (err) {
-    console.error('Erro ao copiar o arquivo:', err);
-    process.exit(1); // Encerra o script com erro
-  }
-  console.log(`Arquivo copiado com sucesso para: ${destinationFileEsm}`);
-});
