@@ -1,0 +1,39 @@
+/* 🌞 LIGHT (default) */
+.code-editor {
+  color: #000000;
+}
+
+.code-editor .token.function {
+  color: #6f42c1;
+}
+
+.code-editor .token.operator {
+  color: #d73a49;
+  background: transparent !important;
+}
+
+.dark.code-editor .token.constant {
+  color: #6a9955;
+}
+
+
+/* 🌙 DARK */
+.dark.code-editor {
+  color: #d4d4d4;
+}
+
+.dark.code-editor .token.function {
+  color: #dcdcaa;
+}
+
+.dark.code-editor .token.operator {
+  color: #c586c0;
+}
+
+.dark.code-editor .token.constant {
+  color: #6a9955;
+}
+
+.dark.code-editor .token.number {
+  color: #FC4337;
+}

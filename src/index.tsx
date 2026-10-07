@@ -16,12 +16,15 @@ import { IModalComponentProps, ModalComponent } from './modal'
 import { ModalBoxStyledComponent } from './modal/modalBox'
 import useSnackbarExt from './snackbarExt'
 import { StepData, StepperComponent, StepperComponentProps, } from './stepper'
-import './styles/index.css'
 import { TableComponent, TableComponentProps, } from './table'
 import { TablePaginationActions, TablePaginationActionsPropsExt } from './table/actions'
 import { StyledListItemText, StyledTableCell, StyledTableRow, StyledTableRowProps, SupportedLocales, TableComponentSetCurrPageProps } from './table/common'
 import { ObjInTableComponentProps, ObjInTableShowHideWrapperComponent, StyledTableTitleCell, TableObjWrapperComponent } from './table/objWrapper'
 import { NodeModelExt, TreeComponent, TreeItemChipComponent, } from './tree'
+
+import './styles/index.css'
+import './styles/prism.css'
+import './styles/react-pro-sidebar.css'
 
 export {
   AccordionGroup, AccordionGroupItem, AccordionGroupProps, AutocompleteClientComponent, AutocompleteClientComponentExt, AutocompleteClientComponentExtProps,

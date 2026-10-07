@@ -1,0 +1,14 @@
+/* REACT-PRO-SIDEBAR */
+.ps-submenu-content {
+  overflow: hidden !important;
+}
+
+.ps-menu-root ul {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.ps-submenu-expand-icon {
+  display: flex;
+}
