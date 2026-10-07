@@ -85,13 +85,13 @@
     "trailingComma": "es5"
   },
   "scripts": {
-    "build": "tsc --project tsconfig.cjs.json && tsc --project tsconfig.esm.json",
     "dev:example": "webpack serve --config appExample/webpack.config.js",
+    "build": "tsc --project tsconfig.cjs.json && tsc --project tsconfig.esm.json",
     "postbuild": "node postbuild.cjs",
     "prepare": "husky",
-    "pub": "npm run build && npm run release && git push --follow-tags origin main && npm publish",
-    "release": "standard-version"
+    "release": "standard-version",
+    "pub": "npm run build && npm run release && git push --follow-tags origin main && npm publish"
   },
   "types": "dist/types/index.d.ts",
-  "version": "2.3.3"
+  "version": "2.3.4"
 }
