@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.4.0](https://github.com/joabssilveira/fwork-react-mui-ext/compare/v2.3.4...v2.4.0) (2026-10-07)
+
+
+### Features
+
+* prosidebar, prism styles ([d22441b](https://github.com/joabssilveira/fwork-react-mui-ext/commit/d22441bab280e028a59f6114310de79f0e8ee4c4))
+
 ### [2.3.4](https://github.com/joabssilveira/fwork-react-mui-ext/compare/v2.3.3...v2.3.4) (2026-10-07)
 
 ### [2.3.3](https://github.com/joabssilveira/fwork-react-mui-ext/compare/v2.3.2...v2.3.3) (2026-10-06)
