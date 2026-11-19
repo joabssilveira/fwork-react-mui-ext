@@ -34,6 +34,7 @@ export interface IAutocompleteClientComponentProps<T extends {}, MaxDepth extend
   fitDropDownWidth?: boolean,
   updateOptionsRef?: React.MutableRefObject<((filter: string, keyValue: boolean) => void) | null | undefined>
   updateOptionsWithValueRef?: React.MutableRefObject<((value: T) => void) | null | undefined>
+  onOptionsChange?: (options: readonly T[]) => void
 }
 
 const CustomPopper = (props: PopperProps) => {
@@ -42,7 +43,7 @@ const CustomPopper = (props: PopperProps) => {
 
 export const AutocompleteClientComponent = <T extends {}, MaxDepth extends number = 3,>(props: IAutocompleteClientComponentProps<T, MaxDepth>) => {
   const { inputValueKeyName, initKeyValue, initOptions, initOption, onChangeItem, onGetData,
-    textFieldProps, getOnInit, getAllOnOpen, fitDropDownWidth, updateOptionsRef, updateOptionsWithValueRef, ...rest } = props
+    textFieldProps, getOnInit, getAllOnOpen, fitDropDownWidth, updateOptionsRef, updateOptionsWithValueRef, onOptionsChange, ...rest } = props
 
   const [inputValue, setInputValue] = React.useState('');
   const [open, setOpen] = React.useState(false);
@@ -57,6 +58,9 @@ export const AutocompleteClientComponent = <T extends {}, MaxDepth extends numbe
     if (updateOptionsWithValueRef)
       updateOptionsWithValueRef.current = doUpdateDataWithValueRef
   }, [])
+  React.useEffect(() => {
+     onOptionsChange?.(rest.options ?? options ?? initOptions)
+  }, [rest.options, options, initOptions])
   const doUpdateDataRef = async (filter: string, keyValue: boolean) => {
     let dataResponse = await getData(filter, keyValue)
     setOptions(dataResponse ?? [])

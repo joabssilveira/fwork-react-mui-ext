@@ -9,6 +9,7 @@ import {
   Typography,
   useTheme
 } from "@mui/material";
+import { StrictOmit } from 'fwork-jsts-common';
 import React, { ReactNode, useState } from "react";
 
 export interface AccordionGroupItem {
@@ -19,25 +20,33 @@ export interface AccordionGroupItem {
   onTitleClick?: (e: React.MouseEvent<HTMLDivElement, MouseEvent>, willExpand: boolean) => void,
   content: ReactNode;
   expanded?: boolean,
-  accordionProps?: Omit<AccordionProps,
+  accordionProps?: StrictOmit<AccordionProps,
     'children' | 'defaultExpanded' | 'key' | 'expanded' | 'onChange' | 'disableGutters' | 'square'>
 }
 
 export interface AccordionGroupProps extends React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
   items: AccordionGroupItem[];
+  exclusiveExpanded?: boolean,
   radius?: number;
   gap?: any,
-  accordionProps?: Omit<AccordionProps,
+  accordionProps?: StrictOmit<AccordionProps,
     'children' | 'defaultExpanded' | 'key' | 'expanded' | 'onChange' | 'disableGutters' | 'square'>
 }
 
-export const AccordionGroup = ({ items, radius = 15, accordionProps, gap = .5, ...props }: AccordionGroupProps) => {
-  const [expanded, setExpanded] = useState<string | false>(items.findLast(i => i.expanded)?.id ?? false);
+export const AccordionGroup = ({ items, exclusiveExpanded = true, radius = 15, accordionProps, gap = .5, ...props }: AccordionGroupProps) => {
+  // const [expanded, setExpanded] = useState<string | false>(items.findLast(i => i.expanded)?.id ?? false);
+  const [expanded, setExpanded] = useState<Record<string, boolean | undefined>>(Object.fromEntries(
+    items.map(item => [item.id, item.expanded])
+  ))
   const theme = useTheme()
 
   const handleChange =
     (panel: string) => (_: React.SyntheticEvent, isExpanded: boolean) => {
-      setExpanded(isExpanded ? panel : false);
+      // setExpanded(isExpanded ? panel : false);
+      setExpanded(old => ({
+        ...(exclusiveExpanded ? {} : old),
+        [panel]: isExpanded
+      }))
     };
 
   return (
@@ -45,9 +54,12 @@ export const AccordionGroup = ({ items, radius = 15, accordionProps, gap = .5, .
       {items.map((item, index) => {
         const isFirst = index === 0;
         const isLast = index === items.length - 1;
-        const isExpanded = expanded === item.id;
-        const prevExpanded = expanded === items[index - 1]?.id;
-        const nextExpanded = expanded === items[index + 1]?.id;
+        // const isExpanded = expanded === item.id;
+        const isExpanded = expanded[item.id]
+        // const prevExpanded = expanded === items[index - 1]?.id;
+        const prevExpanded = expanded[items[index - 1]?.id]
+        // const nextExpanded = expanded === items[index + 1]?.id;
+        const nextExpanded = expanded[items[index + 1]?.id]
 
         let topLeft = 0;
         let topRight = 0;
@@ -93,7 +105,7 @@ export const AccordionGroup = ({ items, radius = 15, accordionProps, gap = .5, .
             // https://chatgpt.com/share/6a341211-bed8-83e9-8c6a-a752cd10f3ac
             // defaultExpanded={item.defaultExpanded}
             key={item.id}
-            expanded={isExpanded}
+            expanded={isExpanded ?? false}
             onChange={handleChange(item.id)}
             disableGutters
             square={false}

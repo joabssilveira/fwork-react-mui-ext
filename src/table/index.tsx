@@ -32,13 +32,14 @@ export interface TableComponentProps<T> {
    */
   rowProps?: {
     onClick?: (event: React.MouseEvent<HTMLTableRowElement, MouseEvent>, item: T) => void
+    onContextMenu?: (event: React.MouseEvent<HTMLTableRowElement, MouseEvent>, item: T) => void
     onChangeChecked?: (e: React.ChangeEvent<HTMLInputElement, Element>, item: T, checked: boolean) => void
     onDisableChecked?: (item: T) => boolean
     onGetItemChecked?: (item: T) => boolean | undefined
-  } & StrictOmit<StyledTableRowProps, 'onClick'>
+  } & StrictOmit<StyledTableRowProps, 'onClick' | 'onContextMenu'>
 }
 
-export const TableComponent: React.FC<TableComponentProps<any>> = <T,>(props: TableComponentProps<T>) => {
+export const TableComponent = <T,>(props: TableComponentProps<T>) => {
   const [page, setPage] = useState(0)
   const [rowsPerPage, setRowsPerPage] = useState(10)
 
@@ -137,6 +138,9 @@ export const TableComponent: React.FC<TableComponentProps<any>> = <T,>(props: Ta
                     onClick={(event: any) => {
                       props.rowProps?.onClick?.(event, item)
                     }}
+                    onContextMenu={(event: any) => {
+                      props.rowProps?.onContextMenu?.(event, item)
+                    }}
                   >
                     {props.rowProps.onChangeChecked
                       ? <>
@@ -144,7 +148,7 @@ export const TableComponent: React.FC<TableComponentProps<any>> = <T,>(props: Ta
                           <Checkbox
                             disabled={props.rowProps.onDisableChecked?.(item)}
                             // checked={(item as Checkable<T>)._checked}
-                            checked={props.rowProps.onGetItemChecked?.(item)}
+                            checked={props.rowProps.onGetItemChecked?.(item) ?? false}
                             onChange={(e, checked) => {
                               props.rowProps?.onChangeChecked?.(e, item, checked)
                             }}

@@ -5,8 +5,8 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { renderTimeViewClock } from '@mui/x-date-pickers/timeViewRenderers';
 import { browserLang } from 'fwork-jsts-browser';
 import { Moment } from "moment";
-import React from "react";
-import { MdCancel } from "react-icons/md";
+import React, { useState } from "react";
+import MdCancel from '@mui/icons-material/Close';
 
 export interface DateTimePickerExtComponentProps
   extends Omit<DateTimePickerProps, 'onChange'> {
@@ -24,14 +24,14 @@ export interface DateTimePickerExtComponentProps
 
 export const DateTimePickerExtComponent = (props: DateTimePickerExtComponentProps) => {
   const { wrapperProps, onChange, ...rest } = props
+  const [cancel, setCancel] = useState(false)
 
   const inputAdornment = (props: InputAdornmentProps) => (
     <InputAdornment {...props}>
-      {rest.value != null && (
+      {cancel && rest.value != null && (
         <IconButton
           style={{
-            marginRight: -10,
-            opacity: .6,
+            marginRight: -5,
           }}
           disabled={rest.disabled}
           onClick={() => onChange?.(null, {} as any)}
@@ -66,6 +66,12 @@ export const DateTimePickerExtComponent = (props: DateTimePickerExtComponentProp
                 width: '100%',
                 ...textFieldProps?.style,
               },
+              onMouseEnter: () => {
+                setCancel(true)
+              },
+              onMouseLeave: () => {
+                setCancel(false)
+              }
             }
           },
         }}
@@ -105,14 +111,14 @@ export interface DatePickerExtComponentProps
 
 export const DatePickerExtComponent = (props: DatePickerExtComponentProps) => {
   const { wrapperProps, onChange, ...rest } = props
+  const [cancel, setCancel] = useState(false)
 
   const inputAdornment = (props: InputAdornmentProps) => (
     <InputAdornment {...props}>
-      {rest.value != null && (
+      {cancel && rest.value != null && (
         <IconButton
           style={{
-            marginRight: -10,
-            opacity: .6,
+            marginRight: -5,
           }}
           disabled={rest.disabled}
           onClick={() => onChange?.(null, {} as any)}
@@ -147,6 +153,12 @@ export const DatePickerExtComponent = (props: DatePickerExtComponentProps) => {
                 width: '100%',
                 ...textFieldProps?.style,
               },
+              onMouseEnter: () => {
+                setCancel(true)
+              },
+              onMouseLeave: () => {
+                setCancel(false)
+              }
             }
           },
         }}

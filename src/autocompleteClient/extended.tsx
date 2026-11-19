@@ -37,6 +37,7 @@ export const AutocompleteClientComponentExt = <T extends {}, MaxDepth extends nu
       addOption.closeRef.current = _closeDialog
   }, [])
   const _closeDialog = () => {
+    
     setOpenPreviewModal(false)
     setAnchorEl(null)
   }
